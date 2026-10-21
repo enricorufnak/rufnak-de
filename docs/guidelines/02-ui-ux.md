@@ -62,7 +62,11 @@ Pflicht: keine horizontale Scrollleiste ab 320 px Breite; getestet mindestens be
 | Kontaktblock | `.contact` (`Kontakt.astro`) | dunkel, Handschrift-Zeile, `dl` mit E-Mail, Mobil, Adresse; Links `mailto:`/`tel:` |
 | Kopieren-Button | `.copy` | ohne JS `hidden`; mit JS sichtbar; Rückmeldung per Toast |
 | Toast | `.toast` | `role="status"`, 1,8 s, unten mittig, 2–3 Wörter („Kopiert“) |
-| Fußzeile | `.site-footer` | © Jahr, „online seit 2016, neu gestaltet 2026“, Rechtliches-Links |
+| Projekt-Filter | `.filters` | Pillen je Kategorie mit Anzahl, `aria-pressed`; ohne JS `hidden` (dann alle Projekte sichtbar); nur bei ≥ 2 Kategorien |
+| Projekt-Karte | `.proj` / `.card` | Raster ab 240 px; Nummer (`.num`), Kategorie, Titel (h2), ein Satz, „Steckbrief ansehen →“ in `--mustard-ink`; Hover nur Schatten |
+| Steckbrief | `.detail`, `.dhead`, `.dgrid`, `.block`, `.facts` | Kopf mit Senf-Nummer, h1, Lead; Textblöcke links, Faktenbox rechts (280 px, sticky); ≤ 900 px untereinander; ohne Textblöcke Faktenbox über volle Breite; leere Felder nicht rendern |
+| Vor/Zurück | `.pn` | zwei Karten, rechts bündig rechts; ≤ 480 px untereinander; nur bei ≥ 2 Projekten |
+| Fußzeile | `.site-footer` | © Jahr, „online seit 2016, neu gestaltet 2026“, ggf. „Über diese Seite“ (→ `/projekte/rufnak-de/`), Rechtliches-Links |
 | Rechtsseiten | `.kit-page` | vom Kit, Stil kommt aus `theme.css` |
 
 **Neue Komponente:** nur, wenn keine bestehende passt. Dann: Klasse in `theme.css` im passenden Abschnitt, Zustände (Hover, Fokus, ohne JS, mobil) definieren, hier eintragen.
@@ -78,9 +82,9 @@ Pflicht: keine horizontale Scrollleiste ab 320 px Breite; getestet mindestens be
 
 ## 7. Inhalte und Navigation
 
-- Hauptnavigation: Über mich · Mein Weg · Kenntnisse · Kontakt. Maximal 5 Einträge.
+- Hauptnavigation: Über mich · Mein Weg · Kenntnisse · (Projekte) · Kontakt. Maximal 5 Einträge.
 - Eigenständige Inhalte bekommen eine eigene URL (`/kontakt/`), keine Hash-Seiten.
-- **Projekte (später):** Nav-Eintrag und Footer-Link erst, wenn mindestens ein Projekt veröffentlicht ist (siehe Projektordner `website/relaunch-analyse-urls-seo.md` 2.2).
+- **Projekte:** `/projekte/` und `/projekte/<slug>/` aus `src/content/projekte/`. Nav-Eintrag „Projekte“, Startseiten-Button „Projekte ansehen“ und Übersicht erst, wenn mindestens ein Projekt veröffentlicht ist (`draft: false`); Footer-Link „Über diese Seite“ erst mit P11. Entwürfe nur in `npm run dev` sichtbar (Hinweis „Entwurf“).
 - 404: kurze Erklärung + Link zur Startseite (Kit-Seite).
 - Leere Bereiche nie zeigen: Abschnitt ohne Inhalt wird nicht gerendert.
 
