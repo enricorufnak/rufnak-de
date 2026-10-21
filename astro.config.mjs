@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import { kit } from './src/kit/integration.ts';
 
 export default defineConfig({
-  // kit() setzt site, trailingSlash 'always' und build.format 'directory' (URL-Standard, nicht überschreiben),
-  // prüft die URLs im Build und liefert Sitemap ohne noindex-Seiten sowie 301-Weiterleitungen.
+  // kit() sets site, trailingSlash 'always' and build.format 'directory' (URL standard, do not override),
+  // checks URLs during the build and provides a sitemap without noindex pages plus 301 redirects.
   integrations: [...kit()],
 });
