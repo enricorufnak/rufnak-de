@@ -34,7 +34,7 @@ Ob eine reine Lebenslauf-Seite „geschäftsmäßig“ ist, ist umstritten. Die 
 
 ## 3. Veröffentlichte persönliche Daten
 
-Eigene Entscheidung (Shorty, 2026-10-18): Adresse, Geburtstag, Mobil, E-Mail werden gezeigt.
+Eigene Entscheidung (Shorty, 18.10.2026): Adresse, Geburtstag, Mobil, E-Mail werden gezeigt.
 
 - [x] Geburtsdatum: keine Pflichtangabe, Risiko Identitätsdiebstahl bekannt; bleibt bewusst (Shorty, 21.10.2026)
 - [ ] Keine Daten Dritter (Familie, Kolleginnen/Kollegen, Vorgesetzte) ohne deren Einwilligung
