@@ -26,7 +26,7 @@ Stand: 21.10.2026 · ergänzt `docs/technik.md` (Stack-Entscheidung)
 ## 3. Code-Regeln
 
 **Allgemein**
-- Kommentare und Bezeichner der Inhalte auf Deutsch (wie bestehend), technische Bezeichner englisch, wo Astro/Web-APIs es vorgeben.
+- **Code-Kommentare auf Englisch.** Inhaltliche Bezeichner (z. B. `werdegang`, `kenntnisse` in `profil.ts`) dürfen deutsch bleiben; Texte für Besucher sind deutsch. Kit-Dateien ändern ihre Kommentare nur über das astro-kit.
 - Jede Datei beginnt mit einem Kommentar: Zweck + wem sie gehört.
 - Keine Inhalte im Markup hart codieren, die in `profil.ts` gehören (Kontaktdaten, Werdegang, Kenntnisse).
 - Keine Geheimnisse im Repo; `.env` wird nicht committet.
@@ -79,9 +79,9 @@ Messung 21.10.2026 (`npm run build`, Startseite):
 ## 6. Workflow
 
 1. Branch von `main` (`feat/…`, `fix/…`, `docs/…`, `chore/…`).
-2. Commits im Stil Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`), Beschreibung deutsch.
+2. Commits im Stil Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`), **Message auf Englisch**, Autor Enrico Rufnak, keine KI-/Tool-Hinweise.
 3. Lokal: `npm run dev`, vor dem Push `npm run ci`.
-4. PR mit Vorlage (`.github/pull_request_template.md`); Build-Check muss grün sein.
+4. PR mit Vorlage (`.github/pull_request_template.md`), Titel und Beschreibung auf Englisch, keine KI-/Tool-Hinweise; Build-Check muss grün sein. Ein Thema je PR (z. B. ein Projekt je PR).
 5. Nach dem Merge: `deploy-tool deploy P11 --dry-run`, dann `deploy-tool deploy P11`. Größere Änderungen vorher über `--staging`.
 
 ## 7. Vor jedem PR (Code)
