@@ -1,0 +1,41 @@
+---
+// Kontakt-Block (Startseite und /kontakt/). Kopieren-Buttons nur mit JS, die Daten stehen auch ohne JS da.
+import { kontakt, profile } from '../data/profil';
+
+interface Props {
+  /** Überschrift-Ebene: h1 auf /kontakt/ (dort ist "Kontakt" die Seitenüberschrift), sonst h3 */
+  heading?: 'h1' | 'h3';
+}
+const { heading = 'h3' } = Astro.props;
+const Heading = heading;
+---
+
+<section id="kontakt" class="contact" aria-labelledby="kontakt-titel">
+  <div>
+    <div class="hand">Sag gern Hallo!</div>
+    <Heading id="kontakt-titel">Kontakt</Heading>
+    <p>Ich freue mich über Nachrichten, ob zu Jobs, Technik oder einfach zum Austausch.</p>
+  </div>
+  <dl>
+    <div>
+      <dt>E-Mail</dt>
+      <dd><a href={`mailto:${kontakt.email}`}>{kontakt.email}</a> <button type="button" class="copy" data-copy={kontakt.email} hidden>Kopieren</button></dd>
+    </div>
+    <div>
+      <dt>Mobil</dt>
+      <dd><a href={`tel:${kontakt.tel}`}>{kontakt.mobil}</a> <button type="button" class="copy" data-copy={kontakt.mobilKopie} hidden>Kopieren</button></dd>
+    </div>
+    <div>
+      <dt>Adresse</dt>
+      <dd>{kontakt.strasse}, {kontakt.ort}</dd>
+    </div>
+    <div>
+      <dt>Geburtstag</dt>
+      <dd>{kontakt.geburtstag}</dd>
+    </div>
+    <div>
+      <dt>Profile</dt>
+      <dd>{profile.map((p) => <a href={p.url} rel="me">{p.name}</a>)}</dd>
+    </div>
+  </dl>
+</section>

@@ -1,0 +1,120 @@
+---
+// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
+// Vorlage für Websites auf All-Inkl ohne Nutzerkonten – vor dem Livegang rechtlich prüfen lassen.
+// Abschnitte für Analytics und Kontaktformular erscheinen nur, wenn sie in site.config.ts aktiv sind;
+// „Keine Cookies“ nur ohne Analytics und ohne PWA (Service Worker speichert auf dem Gerät).
+import Layout from '../layouts/Layout.astro';
+import { site } from '../../site.config';
+import { analyticsId, contactEnabled, legalInfo } from '../kit/types';
+const l = legalInfo(site);
+const ga = Boolean(analyticsId(site));
+const contact = contactEnabled(site);
+const noStorage = !ga && !site.pwa;
+const logs = l.serverLogs;
+const ipText = {
+  full: 'IP-Adresse',
+  shortened: 'IP-Adresse (gekürzt, die letzten beiden Blöcke werden auf 0 gesetzt)',
+  anonymized: 'IP-Adresse (vollständig anonymisiert als 0.0.0.0)',
+  none: '',
+};
+// Abschnittsnummern fortlaufend, je nachdem welche Abschnitte erscheinen
+let n = 0;
+const nr = () => `${++n}.`;
+---
+
+<Layout title="Datenschutzerklärung" description={`Datenschutzerklärung von ${site.name}`}>
+  <article class="kit-page kit-legal">
+    <h1>Datenschutzerklärung</h1>
+
+    <h2>{nr()} Verantwortlicher</h2>
+    <address>
+      {l.owner}<br />
+      {l.street}<br />
+      {l.zip} {l.city}<br />
+      E-Mail: <a href={`mailto:${l.email}`}>{l.email}</a>
+      {l.emailAlt && <><br />E-Mail (alternative Schreibweise): <a href={`mailto:${l.emailAlt}`}>{l.emailAlt}</a></>}
+      {l.phone && <><br />Telefon: {l.phone}</>}
+    </address>
+
+    <h2>{nr()} Hosting</h2>
+    <p>
+      Diese Website wird bei ALL-INKL.COM – Neue Medien Münnich, Hauptstraße 68, 02742 Friedersdorf, Deutschland
+      gehostet. Mit dem Anbieter besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Die Server stehen in
+      Deutschland.
+    </p>
+
+    <h2>{nr()} Server-Logfiles</h2>
+    {logs?.ip === 'none' ? (
+      <p>
+        Beim Aufruf der Website verarbeitet der Server die übermittelten Daten (z. B. IP-Adresse) nur, um die Seite
+        auszuliefern (Art. 6 Abs. 1 lit. f DSGVO). Es werden keine Logfiles gespeichert.
+      </p>
+    ) : (
+      <p>
+        Beim Aufruf der Website speichert der Server automatisch Daten, die dein Browser übermittelt:{' '}
+        {ipText[logs?.ip ?? 'full']}, Datum und Uhrzeit, aufgerufene Seite, Referrer, Browser und Betriebssystem. Das
+        ist technisch nötig, um die Seite auszuliefern und die Sicherheit zu gewährleisten (Art. 6 Abs. 1 lit. f
+        DSGVO).{logs?.statistics && ' Aus diesen Daten erstellt der Hoster eine Zugriffsstatistik ohne Cookies.'}{' '}
+        {logs ? `Die Logfiles werden nach ${logs.retentionDays} Tagen automatisch gelöscht.` : 'Die Logfiles werden nach kurzer Zeit automatisch gelöscht.'}
+      </p>
+    )}
+
+    <h2>{nr()} Kontakt per E-Mail{l.phone && ' oder Telefon'}</h2>
+    <p>
+      Wenn du uns per E-Mail{l.phone && ' oder Telefon'} kontaktierst, verarbeiten wir deine Angaben, um deine Anfrage
+      zu beantworten (Art. 6 Abs. 1 lit. b DSGVO, wenn es um einen Vertrag geht, sonst Art. 6 Abs. 1 lit. f DSGVO). Wir
+      löschen die Daten, sobald sie dafür nicht mehr gebraucht werden und keine Aufbewahrungspflichten bestehen.
+    </p>
+
+    {contact && (
+      <>
+        <h2 id="kontakt">{nr()} Kontaktformular</h2>
+        <p>
+          Wenn du das Kontaktformular nutzt, verarbeiten wir Name, E-Mail-Adresse und Nachricht, um deine Anfrage zu
+          beantworten (Art. 6 Abs. 1 lit. b bzw. f DSGVO). Die Nachricht wird per E-Mail an uns gesendet und nicht in
+          einer Datenbank gespeichert. Zum Schutz vor Missbrauch wird ein Hashwert deiner IP-Adresse für höchstens
+          eine Stunde vorgehalten. Wir löschen deine Anfrage, sobald sie erledigt ist und keine Aufbewahrungspflichten
+          bestehen.
+        </p>
+      </>
+    )}
+
+    {ga && (
+      <>
+        <h2 id="analytics">{nr()} Google Analytics (nur mit Einwilligung)</h2>
+        <p>
+          Mit deiner Einwilligung nutzen wir Google Analytics 4 der Google Ireland Limited, Gordon House, Barrow Street,
+          Dublin 4, Irland. Google Analytics wertet die Nutzung der Website aus (z. B. aufgerufene Seiten, Verweildauer,
+          ungefährer Standort, Gerät). Dazu werden Cookies gesetzt und Daten an Google übertragen, auch in die USA.
+          Google ist nach dem EU-US Data Privacy Framework zertifiziert.
+        </p>
+        <p>
+          Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG). Ohne Einwilligung
+          wird Google Analytics nicht geladen. Du kannst die Einwilligung jederzeit über „Cookie-Einstellungen“ im
+          Seitenfuß widerrufen. Deine Entscheidung speichern wir nur im lokalen Speicher deines Browsers
+          (§ 25 Abs. 2 TDDDG).
+        </p>
+      </>
+    )}
+
+    {noStorage && (
+      <>
+        <h2>{nr()} Keine Cookies, kein Tracking</h2>
+        <p>
+          Diese Website setzt keine Cookies, speichert keine Informationen auf deinem Endgerät und liest keine aus
+          (§ 25 TDDDG). Es gibt keine Analyse- oder Tracking-Werkzeuge und keine Inhalte von Drittanbietern; auch
+          Schriften werden von diesem Server geladen. Ein Cookie-Banner ist deshalb nicht nötig.
+        </p>
+      </>
+    )}
+
+    <h2>{nr()} Deine Rechte</h2>
+    <p>
+      Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der
+      Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch gegen Verarbeitungen auf Grundlage von
+      Art. 6 Abs. 1 lit. f DSGVO (Art. 21). Eine Einwilligung kannst du jederzeit mit Wirkung für die Zukunft
+      widerrufen. Außerdem kannst du dich bei einer Datenschutz-Aufsichtsbehörde beschweren (Art. 77 DSGVO){l.supervisoryAuthority ? `, zuständig ist: ${l.supervisoryAuthority.name}, ${l.supervisoryAuthority.address}.` : '.'}
+    </p>
+    <p>Für alle Anfragen genügt eine E-Mail an <a href={`mailto:${l.email}`}>{l.email}</a>.</p>
+  </article>
+</Layout>

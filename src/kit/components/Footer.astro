@@ -1,0 +1,16 @@
+---
+// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
+// Standard-Footer für src/layouts/Layout.astro; eigene Footer nutzen LegalLinks.
+import { site } from '../../../site.config';
+import LegalLinks from './LegalLinks.astro';
+const year = new Date().getFullYear();
+---
+
+<footer class="kit-footer">
+  <div class="kit-wrap kit-footer__inner">
+    <p>© {year} {site.name}</p>
+    <nav class="kit-footer__links" aria-label="Rechtliches">
+      <LegalLinks />
+    </nav>
+  </div>
+</footer>

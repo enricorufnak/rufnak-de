@@ -1,0 +1,25 @@
+# astro-kit 66a5afcf0751a4935395994a9727f14ced3cf99a – von deploy-tool verwaltet, nicht von Hand ändern
+public/.htaccess
+public/kontakt.php
+src/kit/components/ContactForm.astro
+src/kit/components/CookieBanner.astro
+src/kit/components/Footer.astro
+src/kit/components/Header.astro
+src/kit/components/LegalLinks.astro
+src/kit/integration.ts
+src/kit/layouts/BaseLayout.astro
+src/kit/operator.ts
+src/kit/redirects.ts
+src/kit/scripts/check-indexing.mjs
+src/kit/seo.ts
+src/kit/sitemap.ts
+src/kit/styles/base.css
+src/kit/types.ts
+src/kit/urls.ts
+src/pages/404.astro
+src/pages/danke.astro
+src/pages/datenschutz.astro
+src/pages/impressum.astro
+src/pages/kontakt.json.ts
+src/pages/kontakt/[...index].astro
+src/pages/robots.txt.ts

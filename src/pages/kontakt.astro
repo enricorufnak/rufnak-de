@@ -1,0 +1,12 @@
+---
+// /kontakt/ – alte URL bleibt erhalten (vorher /kontakt). Das Kit-Formular (kontakt/[...index].astro) ist aus; vor contact.enabled: true diese Seite entfernen (sonst zweimal /kontakt/).
+import Layout from '../layouts/Layout.astro';
+import Kontakt from '../components/Kontakt.astro';
+---
+
+<Layout
+  title="Kontakt – Enrico Rufnak"
+  description="Kontakt zu Enrico Rufnak, Softwareentwickler aus Potsdam: E-Mail, Mobilnummer und Adresse."
+>
+  <Kontakt heading="h1" />
+</Layout>

@@ -1,0 +1,96 @@
+/* Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
+   Nur .kit-*-Klassen und --kit-*-Variablen – keine Element-Selektoren, damit eigenes Design (z. B. Tailwind) nicht gestört wird.
+   Farben im Projekt überschreiben (src/styles/…: :root { --kit-accent: …; }).
+   Keine externen Schriften: nur lokale Dateien oder System-Schriften (DSGVO). */
+
+:root {
+  --kit-bg: #fbfbf9;
+  --kit-surface: #ffffff;
+  --kit-text: #1f2421;
+  --kit-muted: #5c6660;
+  --kit-line: #dde2de;
+  --kit-accent: #2f6b4f;
+  --kit-accent-text: #ffffff;
+  --kit-danger: #b3261e;
+  --kit-font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --kit-radius: 8px;
+  --kit-max: 72rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --kit-bg: #141816;
+    --kit-surface: #1c211e;
+    --kit-text: #e7ece9;
+    --kit-muted: #a0aba5;
+    --kit-line: #2f3733;
+    --kit-accent: #7cc39c;
+    --kit-accent-text: #0f1311;
+    --kit-danger: #ff8a80;
+  }
+}
+
+.kit-wrap { max-width: var(--kit-max); margin: 0 auto; padding: 0 1rem; }
+.kit-skip { position: absolute; left: -999px; top: 0; padding: .5rem 1rem; background: var(--kit-surface); color: var(--kit-text); z-index: 100; }
+.kit-skip:focus { left: 1rem; }
+
+/* Standard-Header/-Footer (nur wenn das Projekt sie nutzt) */
+.kit-header { border-bottom: 1px solid var(--kit-line); background: var(--kit-surface); }
+.kit-header__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1.5rem; padding-block: .9rem; }
+.kit-header__brand { font-weight: 700; font-size: 1.15rem; color: var(--kit-text); text-decoration: none; }
+.kit-nav { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; list-style: none; margin: 0; padding: 0; }
+.kit-nav a { color: var(--kit-text); text-decoration: none; }
+.kit-nav a[aria-current='page'], .kit-nav a:hover { color: var(--kit-accent); text-decoration: underline; }
+.kit-footer { border-top: 1px solid var(--kit-line); color: var(--kit-muted); font-size: .9rem; }
+.kit-footer__inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1.5rem; padding-block: 1.25rem; }
+.kit-footer p { margin: 0; }
+.kit-footer__links { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; }
+.kit-footer__links a, .kit-footer__links button { color: var(--kit-muted); }
+
+/* Button, der wie ein Link aussieht (Cookie-Einstellungen) */
+.kit-linkbutton { background: none; border: 0; padding: 0; font: inherit; color: inherit; text-decoration: underline; cursor: pointer; }
+
+/* Kit-Seiten (Impressum, Datenschutz, Kontakt, 404, Danke) */
+.kit-page { max-width: 46rem; line-height: 1.6; }
+.kit-page h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 1rem; }
+.kit-page h2 { font-size: 1.3rem; line-height: 1.3; margin: 2rem 0 .5rem; }
+.kit-page p { margin: 0 0 1rem; }
+.kit-page a { color: var(--kit-accent); text-decoration: underline; }
+.kit-legal address { font-style: normal; margin-bottom: 1rem; }
+
+.kit-button {
+  font: inherit; font-weight: 600; cursor: pointer;
+  background: var(--kit-accent); color: var(--kit-accent-text);
+  border: 1px solid var(--kit-accent); border-radius: var(--kit-radius); padding: .6rem 1.1rem;
+}
+.kit-button--ghost { background: transparent; color: var(--kit-text); border-color: var(--kit-line); }
+.kit-button:focus-visible, .kit-linkbutton:focus-visible, .kit-form input:focus-visible, .kit-form textarea:focus-visible {
+  outline: 2px solid var(--kit-accent); outline-offset: 2px;
+}
+
+/* Einwilligungs-Banner */
+.kit-consent { position: fixed; inset: auto 0 0 0; padding: 1rem; z-index: 50; font-family: var(--kit-font); }
+.kit-consent__box {
+  max-width: 40rem; margin: 0 auto; background: var(--kit-surface); color: var(--kit-text); border: 1px solid var(--kit-line);
+  border-radius: var(--kit-radius); padding: 1rem 1.25rem; box-shadow: 0 6px 24px rgb(0 0 0 / .15); line-height: 1.5;
+}
+.kit-consent__box p { margin: 0 0 .75rem; }
+.kit-consent__box a { color: var(--kit-accent); }
+.kit-consent__title { font-weight: 700; }
+.kit-consent__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .5rem; }
+
+/* Kontaktformular */
+.kit-form { display: grid; gap: 1rem; max-width: 36rem; }
+.kit-form label { display: grid; gap: .3rem; font-weight: 600; }
+.kit-form input, .kit-form textarea {
+  font: inherit; font-weight: 400; color: var(--kit-text); background: var(--kit-surface);
+  border: 1px solid var(--kit-line); border-radius: var(--kit-radius); padding: .55rem .7rem;
+}
+.kit-form .kit-form__check { display: flex; gap: .6rem; align-items: start; font-weight: 400; }
+.kit-form__check input { margin-top: .35rem; }
+.kit-form .kit-form__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.kit-form__error { color: var(--kit-danger); margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .kit-consent, .kit-button { transition: none; }
+}

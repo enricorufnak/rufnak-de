@@ -1,0 +1,70 @@
+---
+// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
+// Rahmen ohne Design: <head> (Titel, Beschreibung, robots, Canonical, Open Graph, Favicon, ggf. PWA), Sprunglink, Einwilligungs-Banner.
+// Header, Footer und Styles kommen aus dem projekteigenen src/layouts/Layout.astro, das diesen Rahmen nutzt.
+// robots kommt nur von hier: noindex-Seiten fallen dadurch automatisch aus der Sitemap (kit() in integration.ts).
+import { site } from '../../../site.config';
+import { isNoindex } from '../seo';
+import { analyticsId, ogImagePath } from '../types';
+import CookieBanner from '../components/CookieBanner.astro';
+import '../styles/base.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** erzwingt noindex (z. B. aus Frontmatter); sonst gelten die Regeln aus seo.ts */
+  noindex?: boolean;
+  /** Pfad oder URL eines Vorschaubilds (1200×630) */
+  image?: string;
+  /** CSS-Klassen für <body> (z. B. Tailwind) */
+  bodyClass?: string;
+}
+
+if (import.meta.env.KIT_CORE !== '1') {
+  throw new Error("astro.config.mjs: integrations: [...kit()] aus './src/kit/integration.ts' fehlt (URL-Standard, Sitemap, Weiterleitungen).");
+}
+const { title, description = site.description, noindex = false, image, bodyClass } = Astro.props;
+const fullTitle = title && title !== site.name ? `${title} | ${site.name}` : site.name;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const robots = noindex || isNoindex(Astro.url.pathname, site) ? 'noindex, follow' : 'index, follow';
+const ogImage = new URL(image ?? ogImagePath(site), site.url).href;
+const ga4Id = analyticsId(site);
+---
+
+<!doctype html>
+<html lang={site.lang ?? 'de'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {site.themeColor && <meta name="theme-color" content={site.themeColor} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {site.pwa && <link rel="manifest" href="/manifest.webmanifest" />}
+    {site.pwa && <link rel="apple-touch-icon" href="/pwa/apple-touch-icon.png" />}
+    {
+      site.pwa && (
+        <script is:inline>
+          if ('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('/sw.js', { scope: '/', updateViaCache: 'none' }));
+        </script>
+      )
+    }
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <a class="kit-skip" href="#inhalt">Zum Inhalt springen</a>
+    <slot />
+    {ga4Id && <CookieBanner ga4Id={ga4Id} />}
+  </body>
+</html>

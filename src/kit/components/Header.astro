@@ -1,0 +1,23 @@
+---
+// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
+// Standard-Header für src/layouts/Layout.astro; Projekte mit eigenem Header brauchen ihn nicht.
+import { site } from '../../../site.config';
+const current = Astro.url.pathname;
+---
+
+<header class="kit-header">
+  <div class="kit-wrap kit-header__inner">
+    <a class="kit-header__brand" href="/">{site.name}</a>
+    {site.nav.length > 0 && (
+      <nav aria-label="Hauptnavigation">
+        <ul class="kit-nav">
+          {site.nav.map((item) => (
+            <li>
+              <a href={item.href} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )}
+  </div>
+</header>

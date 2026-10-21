@@ -1,0 +1,77 @@
+---
+// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
+// Google Analytics wird erst nach ausdrücklicher Einwilligung geladen (§ 25 Abs. 1 TDDDG, Art. 6 Abs. 1 lit. a DSGVO).
+// Die Entscheidung liegt nur im localStorage des Browsers (kein Cookie, kein Server).
+// Google Consent Mode v2 (Basis-Modus): vor dem Laden alle vier Signale „denied“, nach Zustimmung nur
+// analytics_storage „granted“. Ohne Zustimmung wird gtag.js gar nicht geladen (keine cookielosen Pings).
+// Werbung (AdSense) braucht stattdessen eine Google-zertifizierte TCF-CMP, siehe README.
+interface Props {
+  ga4Id: string;
+}
+const { ga4Id } = Astro.props;
+---
+
+<div class="kit-consent" data-kit-consent hidden role="dialog" aria-labelledby="kit-consent-title" aria-live="polite">
+  <div class="kit-consent__box">
+    <p id="kit-consent-title" class="kit-consent__title">Statistik erlauben?</p>
+    <p>
+      Wir möchten mit Google Analytics anonym auswerten, welche Seiten genutzt werden. Dabei werden Daten an Google
+      (auch in die USA) übertragen. Das passiert nur, wenn du zustimmst. Details in der
+      <a href="/datenschutz/#analytics">Datenschutzerklärung</a>.
+    </p>
+    <div class="kit-consent__actions">
+      <button type="button" class="kit-button kit-button--ghost" data-kit-consent-choice="denied">Ablehnen</button>
+      <button type="button" class="kit-button" data-kit-consent-choice="granted">Zustimmen</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ ga4Id }}>
+  (() => {
+    const KEY = 'kit-consent-analytics';
+    const banner = document.querySelector('[data-kit-consent]');
+    const read = () => { try { return localStorage.getItem(KEY); } catch { return null; } };
+    const write = (v) => { try { localStorage.setItem(KEY, v); } catch {} };
+    let loaded = false;
+    const load = () => {
+      if (loaded || !/^G-[A-Z0-9]+$/.test(ga4Id)) return;
+      loaded = true;
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+      });
+      window.gtag('consent', 'update', { analytics_storage: 'granted' });
+      window.gtag('js', new Date());
+      window.gtag('config', ga4Id, { anonymize_ip: true });
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ga4Id);
+      document.head.appendChild(s);
+    };
+    const choice = read();
+    if (choice === 'granted') load();
+    else if (choice !== 'denied') banner.hidden = false;
+
+    document.querySelectorAll('[data-kit-consent-choice]').forEach((b) =>
+      b.addEventListener('click', () => {
+        const v = b.getAttribute('data-kit-consent-choice');
+        const wasGranted = read() === 'granted';
+        write(v);
+        banner.hidden = true;
+        if (v === 'granted') load();
+        else if (wasGranted) {
+          // Widerruf: Signal an Google, dann Seite ohne GA neu laden
+          if (window.gtag) window.gtag('consent', 'update', { analytics_storage: 'denied' });
+          location.reload();
+        }
+      })
+    );
+    document.querySelectorAll('[data-kit-consent-open]').forEach((b) =>
+      b.addEventListener('click', () => { banner.hidden = false; })
+    );
+  })();
+</script>

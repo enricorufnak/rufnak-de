@@ -1,0 +1,68 @@
+---
+// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
+// Daten: zentrale Betreiberdaten (src/kit/operator.ts), je Projekt überschreibbar in site.config.ts → legal.
+// Vorlage – vor dem Livegang rechtlich prüfen lassen.
+import Layout from '../layouts/Layout.astro';
+import { site } from '../../site.config';
+import { legalInfo } from '../kit/types';
+const l = legalInfo(site);
+---
+
+<Layout title="Impressum" description={`Impressum von ${site.name}`}>
+  <article class="kit-page kit-legal">
+    <h1>Impressum</h1>
+
+    <h2>Angaben gemäß § 5 DDG</h2>
+    <address>
+      {l.owner}{l.legalForm && <> ({l.legalForm})</>}<br />
+      {l.street}<br />
+      {l.zip} {l.city}{l.country && <><br />{l.country}</>}
+    </address>
+    {l.representative && <p>Vertreten durch: {l.representative}</p>}
+
+    <h2>Kontakt</h2>
+    <p>
+      E-Mail: <a href={`mailto:${l.email}`}>{l.email}</a>
+      {l.emailAlt && <><br />E-Mail (alternative Schreibweise): <a href={`mailto:${l.emailAlt}`}>{l.emailAlt}</a></>}
+      {l.phone && <><br />Telefon: {l.phone}</>}
+    </p>
+
+    {l.register && (
+      <>
+        <h2>Registereintrag</h2>
+        <p>Registergericht: {l.register.court}<br />Registernummer: {l.register.number}</p>
+      </>
+    )}
+
+    {l.vatId && (
+      <>
+        <h2>Umsatzsteuer-ID</h2>
+        <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: {l.vatId}</p>
+      </>
+    )}
+
+    {l.responsible && (
+      <>
+        <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+        <p>
+          {l.responsible.name}<br />
+          {l.responsible.address ?? `${l.street}, ${l.zip} ${l.city}`}
+        </p>
+      </>
+    )}
+
+    {l.consumerDispute === 'unwilling' && (
+      <>
+        <h2>Verbraucherstreitbeilegung</h2>
+        <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+      </>
+    )}
+
+    <h2>Haftung für Links</h2>
+    <p>
+      Diese Website enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für diese
+      Inhalte ist stets der jeweilige Anbieter verantwortlich. Werden uns Rechtsverletzungen bekannt, entfernen wir
+      solche Links umgehend.
+    </p>
+  </article>
+</Layout>

@@ -1,0 +1,22 @@
+{
+  "name": "website",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check:indexing": "node src/kit/scripts/check-indexing.mjs",
+    "ci": "astro build && node src/kit/scripts/check-indexing.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.4",
+    "@fontsource/caveat": "5.3.0",
+    "@fontsource/karla": "5.3.0",
+    "@fontsource/lora": "5.3.0",
+    "astro": "7.3.6"
+  }
+}

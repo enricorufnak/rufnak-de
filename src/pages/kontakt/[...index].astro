@@ -1,0 +1,19 @@
+---
+// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
+// /kontakt/ entsteht nur, wenn in site.config.ts contact.enabled = true ist.
+import Layout from '../../layouts/Layout.astro';
+import ContactForm from '../../kit/components/ContactForm.astro';
+import { site } from '../../../site.config';
+import { contactEnabled } from '../../kit/types';
+
+export function getStaticPaths() {
+  return contactEnabled(site) ? [{ params: { index: undefined } }] : [];
+}
+---
+
+<Layout title="Kontakt" description={`Kontakt zu ${site.name}`}>
+  <div class="kit-page">
+    <h1>Kontakt</h1>
+    <ContactForm />
+  </div>
+</Layout>

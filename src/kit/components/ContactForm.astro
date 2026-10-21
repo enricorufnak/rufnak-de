@@ -1,0 +1,38 @@
+---
+// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
+// Sendet an /kontakt.php (All-Inkl, PHP mail()). Spam-Schutz: Honeypot, Mindestzeit, Limit je IP.
+import { site } from '../../../site.config';
+import { contactEnabled, legalInfo } from '../types';
+const enabled = contactEnabled(site);
+---
+
+{enabled ? (
+  <form class="kit-form" method="post" action="/kontakt.php" data-kit-form>
+    <p class="kit-form__error" data-kit-form-error hidden>
+      Die Nachricht konnte nicht gesendet werden. Bitte prüfe deine Angaben und versuche es erneut.
+    </p>
+    <label>Name<input id="kit-name" name="name" required maxlength="100" autocomplete="name" /></label>
+    <label>E-Mail<input id="kit-email" name="email" type="email" required maxlength="200" autocomplete="email" /></label>
+    <label>Nachricht<textarea id="kit-message" name="message" required minlength="10" maxlength="5000" rows="6"></textarea></label>
+    <label class="kit-form__hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label>
+    <input type="hidden" name="ts" value="" data-kit-form-ts />
+    <label class="kit-form__check">
+      <input id="kit-privacy" type="checkbox" name="privacy" value="1" required />
+      <span>Ich habe die <a href="/datenschutz/#kontakt">Datenschutzerklärung</a> gelesen. Meine Angaben werden nur zur Beantwortung verwendet.</span>
+    </label>
+    <button class="kit-button" type="submit">Nachricht senden</button>
+  </form>
+) : (
+  <p>Schreib uns an <a href={`mailto:${legalInfo(site).email}`}>{legalInfo(site).email}</a>.</p>
+)}
+
+<script is:inline>
+  (() => {
+    const ts = document.querySelector('[data-kit-form-ts]');
+    if (ts) ts.value = String(Math.floor(Date.now() / 1000));
+    if (new URLSearchParams(location.search).has('fehler')) {
+      const e = document.querySelector('[data-kit-form-error]');
+      if (e) e.hidden = false;
+    }
+  })();
+</script>

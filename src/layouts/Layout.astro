@@ -1,0 +1,117 @@
+---
+// Seitenrahmen von rufnak.de – gehört dem Projekt (Design frei änderbar), wird von kit-sync nicht überschrieben.
+// Pflicht: diese Props an BaseLayout durchreichen und <main id="inhalt"> setzen (Kit-Seiten nutzen dieses Layout).
+// Der Footer enthält <LegalLinks /> (Impressum, Datenschutz, ggf. Kontakt/Cookies).
+// Aufbau: Seitenleiste (Foto, Name, Navigation, Kontakt, Skills) links, Inhalt rechts; unter 900 px Leiste oben.
+import BaseLayout from '../kit/layouts/BaseLayout.astro';
+import LegalLinks from '../kit/components/LegalLinks.astro';
+import { kontakt, profile, sidebarSkills } from '../data/profil';
+// Schriften lokal (keine Verbindung zu Google): nur lateinische Zeichensätze
+import '@fontsource/lora/latin-500.css';
+import '@fontsource/lora/latin-ext-500.css';
+import '@fontsource/lora/latin-600.css';
+import '@fontsource/lora/latin-ext-600.css';
+import '@fontsource/lora/latin-500-italic.css';
+import '@fontsource/lora/latin-ext-500-italic.css';
+import '@fontsource/karla/latin-400.css';
+import '@fontsource/karla/latin-ext-400.css';
+import '@fontsource/karla/latin-500.css';
+import '@fontsource/karla/latin-ext-500.css';
+import '@fontsource/karla/latin-700.css';
+import '@fontsource/karla/latin-ext-700.css';
+import '@fontsource/caveat/latin-600.css';
+import '@fontsource/caveat/latin-ext-600.css';
+import '../styles/theme.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+  image?: string;
+}
+const year = new Date().getFullYear();
+const path = Astro.url.pathname;
+const isHome = path === '/';
+// Startseite: Anker auf derselben Seite, sonst zurück zur Startseite
+const nav = [
+  { label: 'Über mich', href: isHome ? '#ueber' : '/#ueber' },
+  { label: 'Mein Weg', href: isHome ? '#weg' : '/#weg' },
+  { label: 'Kenntnisse', href: isHome ? '#kenntnisse' : '/#kenntnisse' },
+  { label: 'Kontakt', href: '/kontakt/', current: path === '/kontakt/' },
+];
+---
+
+<BaseLayout {...Astro.props}>
+  <slot name="head" slot="head" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" slot="head" />
+  <div class="app">
+    <aside>
+      <picture class="photo">
+        <source srcset="/img/enrico-rufnak.webp" type="image/webp" />
+        <img src="/img/enrico-rufnak.jpg" alt="Enrico Rufnak" width="160" height="160" />
+      </picture>
+      <div>
+        <div class="hi" aria-hidden="true">Hallo, ich bin</div>
+        {isHome ? <h1 class="name">Enrico Rufnak</h1> : <a class="name" href="/">Enrico Rufnak</a>}
+        <div class="role">Softwareentwickler aus Potsdam</div>
+      </div>
+      <nav aria-label="Hauptnavigation">
+        {nav.map((n) => <a href={n.href} aria-current={n.current ? 'page' : undefined}>{n.label}</a>)}
+      </nav>
+      <div class="side-contact">
+        <p class="side-h">Kontakt</p>
+        <dl>
+          <div><dt>E-Mail</dt><dd><a href={`mailto:${kontakt.email}`}>{kontakt.email}</a></dd></div>
+          <div><dt>Mobil</dt><dd><a href={`tel:${kontakt.tel}`}>{kontakt.mobil}</a></dd></div>
+          <div><dt>Adresse</dt><dd>{kontakt.strasse}<br />{kontakt.ort}</dd></div>
+          <div><dt>Geburtstag</dt><dd>{kontakt.geburtstag}</dd></div>
+        </dl>
+        <ul class="chips links">{profile.map((p) => <li><a href={p.url} rel="me">{p.name}</a></li>)}</ul>
+      </div>
+      <div class="side-skills">
+        <p class="side-h">Skills</p>
+        <div class="chips">{sidebarSkills.map((s) => <span>{s}</span>)}</div>
+      </div>
+    </aside>
+
+    <main id="inhalt">
+      <div class="wrap">
+        <slot />
+        <footer class="site-footer">
+          <span>© {year} Enrico Rufnak · online seit 2016, neu gestaltet 2026</span>
+          <nav class="ftr-links" aria-label="Rechtliches">
+            <LegalLinks />
+          </nav>
+        </footer>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" hidden></div>
+
+  <script>
+    // Kopieren-Buttons (Progressive Enhancement): ohne Clipboard-API Text markieren
+    const toast = document.getElementById('toast') as HTMLElement;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const show = (msg: string) => {
+      toast.textContent = msg;
+      toast.hidden = false;
+      clearTimeout(timer);
+      timer = setTimeout(() => (toast.hidden = true), 1800);
+    };
+    document.querySelectorAll<HTMLButtonElement>('.copy').forEach((b) => (b.hidden = false));
+    document.addEventListener('click', (e) => {
+      const b = (e.target as Element).closest<HTMLButtonElement>('.copy');
+      if (!b) return;
+      (navigator.clipboard ? navigator.clipboard.writeText(b.dataset.copy ?? '') : Promise.reject())
+        .then(() => show('Kopiert'))
+        .catch(() => {
+          const r = document.createRange();
+          r.selectNodeContents(b.parentNode as Node);
+          const s = getSelection();
+          s?.removeAllRanges();
+          s?.addRange(r);
+          show('Markiert, jetzt kopieren');
+        });
+    });
+  </script>
+</BaseLayout>

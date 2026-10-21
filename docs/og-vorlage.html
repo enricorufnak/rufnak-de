@@ -1,0 +1,38 @@
+<!doctype html>
+<!-- Vorlage für public/og.png (1200×630). Erzeugen: nach `npm ci` diese Datei in Chromium mit Fenster 1200×630 öffnen und Screenshot speichern
+     (Schriften kommen lokal aus node_modules/@fontsource). Design wie die Seite: Palette "Graphit & Senf", Lora + Karla + Caveat. -->
+<html lang="de"><head><meta charset="utf-8"><style>
+@font-face{font-family:Lora;font-weight:500;src:url(../node_modules/@fontsource/lora/files/lora-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:Lora;font-weight:500;font-style:italic;src:url(../node_modules/@fontsource/lora/files/lora-latin-500-italic.woff2) format('woff2')}
+@font-face{font-family:Lora;font-weight:600;src:url(../node_modules/@fontsource/lora/files/lora-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:Karla;font-weight:500;src:url(../node_modules/@fontsource/karla/files/karla-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:Karla;font-weight:700;src:url(../node_modules/@fontsource/karla/files/karla-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:Caveat;font-weight:600;src:url(../node_modules/@fontsource/caveat/files/caveat-latin-600-normal.woff2) format('woff2')}
+*{margin:0;box-sizing:border-box}
+body{width:1200px;height:630px;overflow:hidden;display:grid;grid-template-columns:540px 1fr;background:#f5f5f3;color:#1d2023;font-family:Karla,sans-serif}
+.side{background:#2b2f33;color:#fff;padding:0 64px;display:flex;flex-direction:column;justify-content:center;gap:14px;position:relative}
+.photo{width:150px;height:150px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 6px rgba(255,255,255,.1);margin-bottom:6px}
+.hi{font-family:Caveat,cursive;font-weight:600;font-size:44px;color:#f2c94c;line-height:1}
+h1{font-family:Lora,serif;font-weight:600;font-size:60px;line-height:1.02;letter-spacing:-.5px}
+.role{font-size:25px;white-space:nowrap;font-weight:500;opacity:.78}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chips span{background:rgba(255,255,255,.12);border-radius:999px;padding:6px 15px;font-size:19px;font-weight:500}
+.main{padding:0 72px 0 76px;display:flex;flex-direction:column;justify-content:center;position:relative}
+h2{font-family:Lora,serif;font-weight:500;font-size:60px;line-height:1.14;}
+h2 em{color:#8a6508}
+.bar{width:96px;height:6px;border-radius:3px;background:#d9a521;margin:36px 0 0}
+.url{position:absolute;left:76px;bottom:52px;font-size:26px;font-weight:700;letter-spacing:.3px}
+</style></head><body>
+<div class="side">
+  <img class="photo" src="../public/img/enrico-rufnak.jpg" alt="">
+  <div class="hi">Hallo, ich bin</div>
+  <h1>Enrico<br>Rufnak</h1>
+  <div class="role">Softwareentwickler aus Potsdam</div>
+  <div class="chips"><span>PHP</span><span>Java</span><span>TypeScript</span><span>Angular</span></div>
+</div>
+<div class="main">
+  <h2>Ich entwickle Software, die <em>verständlich</em> bleibt.</h2>
+  <div class="bar"></div>
+  <div class="url">www.rufnak.de</div>
+</div>
+</body></html>

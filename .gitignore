@@ -1,0 +1,37 @@
+# Betriebssystem
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs / Editoren
+.idea/
+*.iml
+.vscode/
+*.swp
+
+# Umgebungsvariablen und Zugangsdaten – niemals committen
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Logs und temporäre Dateien
+*.log
+logs/
+tmp/
+*.tmp
+*.bak
+
+# Abhängigkeiten
+node_modules/
+vendor/
+
+# Build-Ergebnisse
+dist/
+build/
+.cache/
+
+# Astro
+.astro/

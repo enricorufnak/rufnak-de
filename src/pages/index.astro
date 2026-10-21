@@ -1,0 +1,122 @@
+---
+// Startseite: Über mich, Mein Weg, Zertifikate, Kenntnisse, Was andere sagen, Kontakt. Inhalte: src/data/profil.ts
+import Layout from '../layouts/Layout.astro';
+import Kontakt from '../components/Kontakt.astro';
+import { ausbildung, eigenschaften, kenntnisse, profile, sprachen, stimmen, werdegang, zertifikate } from '../data/profil';
+import { site } from '../../site.config';
+
+// Strukturierte Daten (Person) für die Namenssuche
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Enrico Rufnak',
+  jobTitle: 'Softwareentwickler',
+  url: `${site.url}/`,
+  image: `${site.url}/img/enrico-rufnak.jpg`,
+  email: 'mailto:enrico@rufnak.de',
+  address: { '@type': 'PostalAddress', addressLocality: 'Potsdam', addressCountry: 'DE' },
+  sameAs: profile.map((p) => p.url),
+};
+---
+
+<Layout title="Enrico Rufnak – Softwareentwickler aus Potsdam">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(person)} />
+
+  <section id="ueber" aria-labelledby="ueber-titel">
+    <h2 class="big" id="ueber-titel">Ich entwickle Software, die <em>verständlich</em> bleibt.</h2>
+    <p class="lead">
+      Ich entwickle Webanwendungen, von der ersten Idee bis zum laufenden System. Mir ist wichtig, dass Software für
+      Nutzer genauso klar ist wie für das Team, das sie weiterentwickelt. Hier findest du meinen Werdegang, meine
+      Kenntnisse und wie du mich erreichst.
+    </p>
+    <div class="btns"><a class="btn" href="#weg">Mein Weg</a><a class="btn o" href="/kontakt/">Kontakt</a></div>
+  </section>
+
+  <div class="traits">
+    {eigenschaften.map((e) => <div><b>{e.titel}</b><p>{e.text}</p></div>)}
+  </div>
+
+  <section id="weg" aria-labelledby="weg-titel">
+    <h2 class="s" id="weg-titel">Mein Weg</h2>
+    <ol class="tl">
+      {
+        werdegang.map((w) => (
+          <li>
+            <span><b>{w.rolle}</b>{' '}<span class="at">bei {w.firma}</span></span>
+            <span class="when">{w.von} – {w.bis}</span>
+            {w.notiz && <p class="note">{w.notiz}</p>}
+          </li>
+        ))
+      }
+    </ol>
+    <h3 class="sub">Ausbildung &amp; Weiterbildung</h3>
+    <ol class="tl edu">
+      {
+        ausbildung.map((a) => (
+          <li>
+            <span><b>{a.abschluss}</b></span>
+            <span class="when">{a.von} – {a.bis}</span>
+            <p class="note">{a.ort}</p>
+            {a.themen.length > 0 && <span class="tags">{a.themen.map((t) => <span>{t}</span>)}</span>}
+          </li>
+        ))
+      }
+    </ol>
+    <h3 class="sub">Zertifikate</h3>
+    <ul class="certs">
+      {zertifikate.map((z) => <li class="cert"><b>{z.name}</b><small>{z.von} · {z.datum}</small></li>)}
+    </ul>
+  </section>
+
+  <section id="kenntnisse" aria-labelledby="kenntnisse-titel">
+    <h2 class="s" id="kenntnisse-titel">Kenntnisse</h2>
+    <div class="skillgrid">
+      <div class="feature">
+        <div>
+          <div class="hand">Mein aktueller Schwerpunkt</div>
+          <h3>Eine Codebasis, ein Build, zwei Plattformen.</h3>
+          <p>
+            Ich entwickle Anwendungen, die aus demselben Code als Android-App auf dem Gerät und direkt im Browser
+            laufen. So bleibt die Pflege überschaubar und Nutzer arbeiten dort, wo es für sie passt.
+          </p>
+        </div>
+        <div class="flow">
+          <div class="step"><small>Code</small><b>Eine Anwendung</b><span class="tags"><span>Java</span><span>TypeScript</span><span>Angular</span><span>Angular Material</span></span></div>
+          <span class="arrow" aria-hidden="true">→</span>
+          <div class="step"><small>Build</small><b>Ein Build-Prozess</b><span class="tags"><span>Gradle</span><span>Maven</span><span>Cordova</span></span></div>
+          <span class="arrow" aria-hidden="true">→</span>
+          <div class="step"><small>Ergebnis</small><div class="out"><div>Android-App, nativ oder hybrid</div><div>Web-App im Browser</div></div></div>
+        </div>
+      </div>
+      {
+        kenntnisse.map((k) => (
+          <div class="skill">
+            <h3>{k.gruppe}</h3>
+            <div class="tags">{k.liste.map((t) => <span>{t}</span>)}</div>
+            {k.notiz && <p class="skillnote">{k.notiz}</p>}
+          </div>
+        ))
+      }
+      <div class="skill">
+        <h3>Sprachen</h3>
+        <ul class="lang">{sprachen.map((s) => <li>{s.sprache} <span>{s.niveau}</span></li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="stimmen" aria-labelledby="stimmen-titel">
+    <h2 class="s" id="stimmen-titel">Was andere sagen <small>aus Arbeitszeugnissen</small></h2>
+    <div class="quotes">
+      {
+        stimmen.map((s) => (
+          <figure>
+            <blockquote>„{s.zitat}“</blockquote>
+            <figcaption>{s.quelle}</figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </section>
+
+  <Kontakt />
+</Layout>
