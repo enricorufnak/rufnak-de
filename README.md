@@ -9,7 +9,7 @@ Persönliche Website von Enrico Rufnak, Softwareentwickler (Relaunch 2026).
 ## Struktur
 
 ```
-docs/            Konzepte, Notizen, Fahrpläne; og-vorlage.html = Vorlage für public/og.png
+docs/            Konzepte, Notizen, Fahrpläne; og-vorlage.html = Vorlage für public/og.png; guidelines/ = Styleguide, UX, Tonalität, SEO/A11y, Code, Recht
 src/             Quellcode (src/kit/ verwaltet das astro-kit, nicht von Hand ändern)
 public/          statische Dateien, og.png (1200×630), favicon.svg
 assets/          Bilder, Logos, Grafiken

@@ -2,7 +2,7 @@
 // Seitenrahmen von rufnak.de – gehört dem Projekt (Design frei änderbar), wird von kit-sync nicht überschrieben.
 // Pflicht: diese Props an BaseLayout durchreichen und <main id="inhalt"> setzen (Kit-Seiten nutzen dieses Layout).
 // Der Footer enthält <LegalLinks /> (Impressum, Datenschutz, ggf. Kontakt/Cookies).
-// Aufbau: Seitenleiste (Foto, Name, Navigation, Kontakt, Skills) links, Inhalt rechts; unter 900 px Leiste oben.
+// Aufbau: Seitenleiste (Foto, Name, Navigation, Kontakt, Kenntnisse) links, Inhalt rechts; unter 900 px Leiste oben.
 import BaseLayout from '../kit/layouts/BaseLayout.astro';
 import LegalLinks from '../kit/components/LegalLinks.astro';
 import { kontakt, profile, sidebarSkills } from '../data/profil';
@@ -69,7 +69,7 @@ const nav = [
         <ul class="chips links">{profile.map((p) => <li><a href={p.url} rel="me">{p.name}</a></li>)}</ul>
       </div>
       <div class="side-skills">
-        <p class="side-h">Skills</p>
+        <p class="side-h">Kenntnisse</p>
         <div class="chips">{sidebarSkills.map((s) => <span>{s}</span>)}</div>
       </div>
     </aside>
