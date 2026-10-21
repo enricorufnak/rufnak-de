@@ -2,7 +2,7 @@
 // Page frame of rufnak.de – owned by the project (design can be changed freely), not overwritten by kit-sync.
 // Required: pass these props through to BaseLayout and keep <main id="inhalt"> (kit pages use this layout).
 // The footer contains <LegalLinks /> (imprint, privacy, contact/cookies if enabled).
-// Structure: sidebar (photo, name, navigation, contact, skills) on the left; content on the right; below 900 px the sidebar moves above it.
+// Structure: sidebar (photo, name, navigation, contact, Kenntnisse) on the left; content on the right; below 900 px the sidebar moves above it.
 import BaseLayout from '../kit/layouts/BaseLayout.astro';
 import LegalLinks from '../kit/components/LegalLinks.astro';
 import { kontakt, profile, sidebarSkills } from '../data/profil';
@@ -69,7 +69,7 @@ const nav = [
         <ul class="chips links">{profile.map((p) => <li><a href={p.url} rel="me">{p.name}</a></li>)}</ul>
       </div>
       <div class="side-skills">
-        <p class="side-h">Skills</p>
+        <p class="side-h">Kenntnisse</p>
         <div class="chips">{sidebarSkills.map((s) => <span>{s}</span>)}</div>
       </div>
     </aside>
