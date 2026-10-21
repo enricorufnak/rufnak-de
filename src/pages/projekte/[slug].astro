@@ -1,0 +1,81 @@
+---
+// /projekte/<slug>/ – project profile ("Steckbrief"). Content: src/content/projekte/<slug>.md
+import type { GetStaticPaths } from 'astro';
+import Layout from '../../layouts/Layout.astro';
+import { getPublishedProjects, projektNummer, projektUrl, type Projekt } from '../../lib/projekte';
+
+export const getStaticPaths = (async () => {
+  const projekte = await getPublishedProjects();
+  return projekte.map((p, i) => ({
+    params: { slug: p.id },
+    props: {
+      projekt: p,
+      // Neighbours wrap around; no navigation with a single project
+      prev: projekte.length > 1 ? projekte[(i + projekte.length - 1) % projekte.length] : undefined,
+      next: projekte.length > 1 ? projekte[(i + 1) % projekte.length] : undefined,
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  projekt: Projekt;
+  prev?: Projekt;
+  next?: Projekt;
+}
+const { projekt, prev, next } = Astro.props;
+const d = projekt.data;
+// Text blocks without content are not rendered
+const block = (titel: string, text?: string) => (text ? [{ titel, text }] : []);
+---
+
+<Layout title={`${d.titel} – Projekt von Enrico Rufnak`} description={d.beschreibung}>
+  <article class="detail" aria-labelledby="projekt-titel">
+    <a class="back" href="/projekte/">← Alle Projekte</a>
+    <div class="dhead">
+      <span class="num">{d.draft ? `${projektNummer(projekt)} · Entwurf` : projektNummer(projekt)}</span>
+      <h1 id="projekt-titel">{d.titel}</h1>
+      <p class="lead">{d.beschreibung}</p>
+    </div>
+
+    <div class="dgrid">
+      <div class="dmain">
+        {block('Idee & Ziel', d.idee).map((b) => <div class="block"><h2>{b.titel}</h2><p>{b.text}</p></div>)}
+        {
+          d.versionen && (
+            <div class="block">
+              <h2>Versionen</h2>
+              <ol class="tl">
+                {d.versionen.map((v) => (
+                  <li>
+                    <b>{v.titel}</b>
+                    <span class="when">{v.jahr}</span>
+                    <p class="note">{v.text}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )
+        }
+        {block('Umsetzung', d.umsetzung).map((b) => <div class="block"><h2>{b.titel}</h2><p>{b.text}</p></div>)}
+        {block('Was ich dabei gelernt habe', d.gelernt).map((b) => <div class="block"><h2>{b.titel}</h2><p>{b.text}</p></div>)}
+      </div>
+      <dl class="facts">
+        <div><dt>Projekt</dt><dd>{projektNummer(projekt)}</dd></div>
+        <div><dt>Kategorie</dt><dd>{d.kategorie}</dd></div>
+        {d.status && <div><dt>Status</dt><dd>{d.status}</dd></div>}
+        {d.technik && <div><dt>Technik</dt><dd>{d.technik.map((t, i) => <>{i > 0 && <br />}{t}</>)}</dd></div>}
+        {d.start && <div><dt>Start</dt><dd>{d.start}</dd></div>}
+        {d.link && <div><dt>Link</dt><dd><a href={d.link.url}>{d.link.label}</a></dd></div>}
+      </dl>
+    </div>
+
+    {
+      prev && next && (
+        <nav class="pn" aria-label="Weitere Projekte">
+          <a href={projektUrl(prev)}><small>← Vorheriges</small><b>{projektNummer(prev)} {prev.data.titel}</b></a>
+          <a href={projektUrl(next)}><small>Nächstes →</small><b>{projektNummer(next)} {next.data.titel}</b></a>
+        </nav>
+      )
+    }
+  </article>
+</Layout>

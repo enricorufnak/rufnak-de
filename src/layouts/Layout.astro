@@ -6,6 +6,7 @@
 import BaseLayout from '../kit/layouts/BaseLayout.astro';
 import LegalLinks from '../kit/components/LegalLinks.astro';
 import { kontakt, profile, sidebarSkills } from '../data/profil';
+import { getPublishedProjects } from '../lib/projekte';
 // Schriften lokal (keine Verbindung zu Google): nur lateinische Zeichensätze
 import '@fontsource/lora/latin-500.css';
 import '@fontsource/lora/latin-ext-500.css';
@@ -32,11 +33,15 @@ interface Props {
 const year = new Date().getFullYear();
 const path = Astro.url.pathname;
 const isHome = path === '/';
+const projekte = await getPublishedProjects();
+const ueberSeite = projekte.find((p) => p.id === 'rufnak-de');
 // Startseite: Anker auf derselben Seite, sonst zurück zur Startseite
 const nav = [
   { label: 'Über mich', href: isHome ? '#ueber' : '/#ueber' },
   { label: 'Mein Weg', href: isHome ? '#weg' : '/#weg' },
   { label: 'Kenntnisse', href: isHome ? '#kenntnisse' : '/#kenntnisse' },
+  // Projects only appear once at least one is published
+  ...(projekte.length ? [{ label: 'Projekte', href: '/projekte/', current: path.startsWith('/projekte/') }] : []),
   { label: 'Kontakt', href: '/kontakt/', current: path === '/kontakt/' },
 ];
 ---
@@ -78,7 +83,10 @@ const nav = [
       <div class="wrap">
         <slot />
         <footer class="site-footer">
-          <span>© {year} Enrico Rufnak · online seit 2016, neu gestaltet 2026</span>
+          <span>
+            © {year} Enrico Rufnak · online seit 2016, neu gestaltet 2026
+            {ueberSeite && <>{' · '}<a href="/projekte/rufnak-de/">Über diese Seite</a></>}
+          </span>
           <nav class="ftr-links" aria-label="Rechtliches">
             <LegalLinks />
           </nav>

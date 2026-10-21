@@ -4,6 +4,9 @@ import Layout from '../layouts/Layout.astro';
 import Kontakt from '../components/Kontakt.astro';
 import { ausbildung, eigenschaften, kenntnisse, profile, sprachen, stimmen, werdegang, zertifikate } from '../data/profil';
 import { site } from '../../site.config';
+import { getPublishedProjects } from '../lib/projekte';
+
+const hatProjekte = (await getPublishedProjects()).length > 0;
 
 // Strukturierte Daten (Person) für die Namenssuche
 const person = {
@@ -27,9 +30,12 @@ const person = {
     <p class="lead">
       Ich entwickle Webanwendungen, von der ersten Idee bis zum laufenden System. Mir ist wichtig, dass Software für
       Nutzer genauso klar ist wie für das Team, das sie weiterentwickelt. Hier findest du meinen Werdegang, meine
-      Kenntnisse und wie du mich erreichst.
+      Kenntnisse, {hatProjekte && 'eine Auswahl meiner Projekte '}und wie du mich erreichst.
     </p>
-    <div class="btns"><a class="btn" href="#weg">Mein Weg</a><a class="btn o" href="/kontakt/">Kontakt</a></div>
+    <div class="btns">
+      {hatProjekte ? <a class="btn" href="/projekte/">Projekte ansehen</a> : <a class="btn" href="#weg">Mein Weg</a>}
+      <a class="btn o" href="/kontakt/">Kontakt</a>
+    </div>
   </section>
 
   <div class="traits">
