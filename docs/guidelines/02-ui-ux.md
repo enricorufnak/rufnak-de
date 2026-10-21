@@ -14,7 +14,7 @@ Stand: 21.10.2026 · Umsetzung: `src/layouts/Layout.astro`, `src/styles/theme.cs
 | Bereich | Desktop (> 900 px) | Tablet/Handy (≤ 900 px) |
 |---|---|---|
 | Raster | 2 Spalten: Seitenleiste 310 px + Inhalt | 1 Spalte |
-| Seitenleiste | fest (sticky), volle Höhe: Foto, Name, Rolle, Navigation, Kontakt, Profile, Skills | oben, Foto 96 px neben Name; nur Navigation; Kontakt/Skills ausgeblendet |
+| Seitenleiste | fest (sticky), volle Höhe: Foto, Name, Rolle, Navigation, Kontakt, Profile, Kenntnisse | oben, Foto 96 px neben Name; nur Navigation; Kontakt/Kenntnisse ausgeblendet |
 | Inhalt | max. 900 px breit, Abschnitte mit 64 px Abstand | Seitenrand mind. 16 px |
 | Kontaktblock | 2 Spalten | 1 Spalte; ≤ 480 px Label über Wert |
 

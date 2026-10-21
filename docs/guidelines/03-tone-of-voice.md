@@ -47,7 +47,7 @@ Neue Texte an diesen Bausteinen messen: gleiche Länge, gleiche Temperatur.
 |---|---|
 | Softwareentwickler | Developer, Coder, Programmierer, Ninja, Rockstar |
 | Webanwendung | Web-App (im Fließtext) |
-| Kenntnisse | Skills (Ausnahme: kurzes Label in der Seitenleiste, siehe offene Punkte) |
+| Kenntnisse (auch in der Seitenleiste) | Skills |
 | Mein Weg / Werdegang | Lebenslauf (als Abschnittstitel), CV |
 | Kontakt | Get in touch, Let's talk |
 | Projekte (später) | Portfolio, Cases, Referenzen |
@@ -85,5 +85,4 @@ Regel: Microcopy höchstens 3 Wörter, Verb oder Ergebnis, kein „Erfolgreich!�
 
 ## 9. Offene Punkte
 
-- Seitenleiste nutzt „Skills“, Abschnitt „Kenntnisse“. Entscheiden, ob die Leiste auf „Kenntnisse“ umgestellt wird.
 - Kit-Seite `danke` sagt „Wir melden uns …“; nur relevant, falls das Kontaktformular je aktiviert wird (dann Ich-Form per astro-kit-PR).

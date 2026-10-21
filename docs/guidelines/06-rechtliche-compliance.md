@@ -36,13 +36,15 @@ Ob eine reine Lebenslauf-Seite „geschäftsmäßig“ ist, ist umstritten. Die 
 
 Eigene Entscheidung (Shorty, 2026-10-18): Adresse, Geburtstag, Mobil, E-Mail werden gezeigt.
 
-- [ ] Bewusst bleiben: Geburtsdatum ist keine Pflichtangabe und erleichtert Identitätsdiebstahl
+- [x] Geburtsdatum: keine Pflichtangabe, Risiko Identitätsdiebstahl bekannt; bleibt bewusst (Shorty, 21.10.2026)
 - [ ] Keine Daten Dritter (Familie, Kolleginnen/Kollegen, Vorgesetzte) ohne deren Einwilligung
 - [ ] Zeugnis-Zitate ohne Namen von Unterzeichnenden; nur Firmenname als Quelle
 
 ## 4. Urheber- und Persönlichkeitsrecht
 
-- [ ] **Profilfoto:** Nutzungsrecht für Website **und** Vorschaubild (`og.png`) vom Fotografen/Studio vorhanden; Urhebernennung falls vereinbart
+- [x] **Profilfoto/`og.png`:** mit KI erstellt (Shorty, 21.10.2026) → keine Rechte eines Fotografen zu klären
+- [ ] Nutzungsbedingungen des KI-Werkzeugs erlauben die öffentliche Nutzung des Bildes (Ausgaben-Lizenz prüfen, Nachweis ablegen)
+- [ ] KI-Verordnung Art. 50 Abs. 4 (gilt ab 02.08.2026): realistisch wirkende KI-Bilder echter Personen („Deepfake“) sind offenzulegen, Ausnahme nur für rein persönliche, nicht berufliche Nutzung. Ob ein KI-Porträt von sich selbst auf einer beruflichen Seite darunter fällt, ist ungeklärt → prüfen lassen; ggf. dezenter Hinweis (z. B. im Alt-Text oder Impressum). Steht im Spannungsfeld zur Vorgabe „KI-Mitwirkung nicht erwähnen“ (Brand Styleguide) – Recht hat Vorrang.
 - [ ] Schriften Lora, Karla, Caveat: SIL Open Font License – Selbsthosting erlaubt ✔
 - [ ] Keine fremden Bilder, Logos oder Grafiken ohne Lizenz (auch keine Firmenlogos im Werdegang)
 - [ ] Firmennamen im Werdegang nur als Text (Nennung zulässig, keine Markennutzung)
