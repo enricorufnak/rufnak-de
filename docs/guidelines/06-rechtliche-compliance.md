@@ -43,7 +43,8 @@ Eigene Entscheidung (Shorty, 2026-10-18): Adresse, Geburtstag, Mobil, E-Mail wer
 ## 4. Urheber- und Persönlichkeitsrecht
 
 - [x] `og.png`: Gestaltung aus `docs/og-vorlage.html` (mit KI erstellt, Shorty 21.10.2026), Schriften OFL, enthält das Profilfoto
-- [ ] **Profilfoto (2016):** Nutzungsrecht vom Fotografen/Studio für Website **und** `og.png` vorhanden; Urhebernennung falls vereinbart
+- [x] **Profilfoto (2016):** Nutzungsrecht für Website und `og.png` vorhanden (Shorty, 21.10.2026)
+- [ ] Neues Foto: Nutzungsrecht und ggf. vereinbarte Urhebernennung vorher klären
 - [ ] Schriften Lora, Karla, Caveat: SIL Open Font License – Selbsthosting erlaubt ✔
 - [ ] Keine fremden Bilder, Logos oder Grafiken ohne Lizenz (auch keine Firmenlogos im Werdegang)
 - [ ] Firmennamen im Werdegang nur als Text (Nennung zulässig, keine Markennutzung)
