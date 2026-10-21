@@ -42,9 +42,8 @@ Eigene Entscheidung (Shorty, 2026-10-18): Adresse, Geburtstag, Mobil, E-Mail wer
 
 ## 4. Urheber- und Persönlichkeitsrecht
 
-- [x] **Profilfoto/`og.png`:** mit KI erstellt (Shorty, 21.10.2026) → keine Rechte eines Fotografen zu klären
-- [ ] Nutzungsbedingungen des KI-Werkzeugs erlauben die öffentliche Nutzung des Bildes (Ausgaben-Lizenz prüfen, Nachweis ablegen)
-- [ ] KI-Verordnung Art. 50 Abs. 4 (gilt ab 02.08.2026): realistisch wirkende KI-Bilder echter Personen („Deepfake“) sind offenzulegen, Ausnahme nur für rein persönliche, nicht berufliche Nutzung. Ob ein KI-Porträt von sich selbst auf einer beruflichen Seite darunter fällt, ist ungeklärt → prüfen lassen; ggf. dezenter Hinweis (z. B. im Alt-Text oder Impressum). Steht im Spannungsfeld zur Vorgabe „KI-Mitwirkung nicht erwähnen“ (Brand Styleguide) – Recht hat Vorrang.
+- [x] `og.png`: Gestaltung aus `docs/og-vorlage.html` (mit KI erstellt, Shorty 21.10.2026), Schriften OFL, enthält das Profilfoto
+- [ ] **Profilfoto (2016):** Nutzungsrecht vom Fotografen/Studio für Website **und** `og.png` vorhanden; Urhebernennung falls vereinbart
 - [ ] Schriften Lora, Karla, Caveat: SIL Open Font License – Selbsthosting erlaubt ✔
 - [ ] Keine fremden Bilder, Logos oder Grafiken ohne Lizenz (auch keine Firmenlogos im Werdegang)
 - [ ] Firmennamen im Werdegang nur als Text (Nennung zulässig, keine Markennutzung)

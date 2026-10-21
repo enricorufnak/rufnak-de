@@ -77,11 +77,11 @@ Alle lokal über `@fontsource` (keine Verbindung zu Google), nur `latin` + `lati
 
 ## 5. Bildsprache
 
-- **Profilfoto:** realistisches Porträt, rund beschnitten, neutraler Hintergrund, Blick zur Kamera. Mit KI erstellt (Shorty, 21.10.2026); Rechtliches siehe [06](06-rechtliche-compliance.md#4-urheber--und-persönlichkeitsrecht). Bei neuem Foto: Seite, `og.png`, JSON-LD gemeinsam tauschen.
+- **Profilfoto:** echtes Foto, rund beschnitten, neutraler Hintergrund, Blick zur Kamera. Aktuell Foto von 2016 als Übergang; aktuelles Foto nachreichen. Bei neuem Foto: Seite, `og.png`, JSON-LD gemeinsam tauschen.
 - Dateien: `public/img/enrico-rufnak.webp` + `.jpg`, quadratisch, mind. 320 × 320 px (2× für 160 px).
 - Keine Stockfotos, keine Illustrationen mit Personen, keine Emojis als Gestaltung.
 - Icons sparsam und typografisch (✓ in Zertifikaten, „ als Zitatzeichen). Keine Icon-Bibliothek einbinden.
-- Vorschaubild `public/og.png` (1200 × 630) aus `docs/og-vorlage.html`; bei Änderung an Foto, Rolle oder Farben neu erzeugen.
+- Vorschaubild `public/og.png` (1200 × 630) aus `docs/og-vorlage.html`: Layout im Styleguide (Leiste mit Foto, Name, Rolle, Chips; rechts Leitsatz). Bei Änderung an Foto, Rolle oder Farben neu erzeugen.
 
 ## 6. Formen
 
