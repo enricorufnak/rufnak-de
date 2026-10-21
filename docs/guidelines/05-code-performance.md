@@ -6,7 +6,7 @@ Stand: 21.10.2026 · ergänzt `docs/technik.md` (Stack-Entscheidung)
 
 | Punkt | Festlegung |
 |---|---|
-| Framework | Astro 7, rein statisch, Node ≥ 22.12 (`.nvmrc`) |
+| Framework | Astro 7, rein statisch, Node ≥ 22.12 (`package.json` → `engines`; `.nvmrc` = 22 für CI/nvm) |
 | Basis | astro-kit (`src/kit/`, `.kit-manifest`, Kit-Seiten) – **nur per `deploy-tool kit-sync P11`** ändern |
 | Inhalte | `src/data/profil.ts`; später Projekte als Markdown-Collection (kein MDX, keine remark/rehype-Plugins) |
 | Styles | eine Datei `src/styles/theme.css` mit Tokens in `:root` |
