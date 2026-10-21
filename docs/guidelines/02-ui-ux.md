@@ -72,7 +72,7 @@ Pflicht: keine horizontale Scrollleiste ab 320 px Breite; getestet mindestens be
 - **Hover:** Farbwechsel, keine Größen- oder Positionsänderung.
 - **Fokus:** `:focus-visible` mit 2 px Senf-Ring, 3 px Abstand. Nie `outline: none` ohne Ersatz.
 - **Klickflächen:** mind. 24 × 24 px (WCAG 2.5.8), Ziel 44 × 44 px für Navigation und Buttons auf Mobil.
-- **Links:** im Fließtext unterstrichen (Senf-Unterstrich, 3 px Abstand); in der Leiste ohne Unterstrich, Hover mit Unterstrich.
+- **Links:** im Fließtext unterstrichen (Senf-Unterstrich, 3 px Abstand). In Seitenleiste, Fußzeile und Kontaktkarte ohne Unterstrich; Senf-Unterstrich nur bei Hover, Tastaturfokus, Klick und (Fußzeile) für die aktuelle Seite.
 - **Externe Links** (Profile) im selben Tab, `rel="me"`; kein `target="_blank"` ohne Hinweis.
 - **Weiches Scrollen** zu Ankern; Abschnitte mit `scroll-margin-top: 24px`.
 
