@@ -26,6 +26,7 @@ const { projekt, prev, next } = Astro.props;
 const d = projekt.data;
 // Text blocks without content are not rendered
 const block = (titel: string, text?: string) => (text ? [{ titel, text }] : []);
+const hatText = !!(d.idee || d.umsetzung || d.gelernt || d.versionen);
 ---
 
 <Layout title={`${d.titel} – Projekt von Enrico Rufnak`} description={d.beschreibung}>
@@ -37,28 +38,32 @@ const block = (titel: string, text?: string) => (text ? [{ titel, text }] : []);
       <p class="lead">{d.beschreibung}</p>
     </div>
 
-    <div class="dgrid">
-      <div class="dmain">
-        {block('Idee & Ziel', d.idee).map((b) => <div class="block"><h2>{b.titel}</h2><p>{b.text}</p></div>)}
-        {
-          d.versionen && (
-            <div class="block">
-              <h2>Versionen</h2>
-              <ol class="tl">
-                {d.versionen.map((v) => (
-                  <li>
-                    <b>{v.titel}</b>
-                    <span class="when">{v.jahr}</span>
-                    <p class="note">{v.text}</p>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          )
-        }
-        {block('Umsetzung', d.umsetzung).map((b) => <div class="block"><h2>{b.titel}</h2><p>{b.text}</p></div>)}
-        {block('Was ich dabei gelernt habe', d.gelernt).map((b) => <div class="block"><h2>{b.titel}</h2><p>{b.text}</p></div>)}
-      </div>
+    <div class:list={['dgrid', { solo: !hatText }]}>
+      {
+        hatText && (
+          <div class="dmain">
+            {block('Idee & Ziel', d.idee).map((b) => <div class="block"><h2>{b.titel}</h2><p>{b.text}</p></div>)}
+            {
+              d.versionen && (
+                <div class="block">
+                  <h2>Versionen</h2>
+                  <ol class="tl">
+                    {d.versionen.map((v) => (
+                      <li>
+                        <b>{v.titel}</b>
+                        <span class="when">{v.jahr}</span>
+                        <p class="note">{v.text}</p>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              )
+            }
+            {block('Umsetzung', d.umsetzung).map((b) => <div class="block"><h2>{b.titel}</h2><p>{b.text}</p></div>)}
+            {block('Was ich dabei gelernt habe', d.gelernt).map((b) => <div class="block"><h2>{b.titel}</h2><p>{b.text}</p></div>)}
+          </div>
+        )
+      }
       <dl class="facts">
         <div><dt>Projekt</dt><dd>{projektNummer(projekt)}</dd></div>
         <div><dt>Kategorie</dt><dd>{d.kategorie}</dd></div>
