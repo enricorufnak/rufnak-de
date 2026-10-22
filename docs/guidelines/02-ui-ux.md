@@ -65,7 +65,7 @@ Pflicht: keine horizontale Scrollleiste ab 320 px Breite; getestet mindestens be
 | Projekt-Filter | `.filters` | Pillen je Kategorie mit Anzahl, `aria-pressed`; ohne JS `hidden` (dann alle Projekte sichtbar); nur bei ≥ 2 Kategorien |
 | Projekt-Karte | `.proj` / `.card` | Raster ab 240 px; Nummer (`.num`), Kategorie, Titel (h2), ein Satz, „Steckbrief ansehen →“ in `--mustard-ink`; Hover nur Schatten |
 | Steckbrief | `.detail`, `.dhead`, `.dgrid`, `.block`, `.facts` | Kopf mit Senf-Nummer, h1, Lead; Textblöcke links, Faktenbox rechts (280 px, sticky); ≤ 900 px untereinander; ohne Textblöcke Faktenbox über volle Breite; leere Felder nicht rendern |
-| Vor/Zurück | `.pn` | zwei Karten, rechts bündig rechts; ≤ 480 px untereinander; nur bei ≥ 2 Projekten |
+| Vor/Zurück | `.pn` | zwei Karten, die rechte rechtsbündig; ≤ 480 px untereinander, beide linksbündig; nur bei ≥ 2 Projekten |
 | Fußzeile | `.site-footer` | © Jahr, „online seit 2016, neu gestaltet 2026“, ggf. „Über diese Seite“ (→ `/projekte/rufnak-de/`), Rechtliches-Links |
 | Rechtsseiten | `.kit-page` | vom Kit, Stil kommt aus `theme.css` |
 
