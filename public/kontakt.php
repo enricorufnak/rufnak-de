@@ -1,7 +1,7 @@
 <?php
-// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
-// Kontaktformular für All-Inkl: PHP mail(), kein externer Dienst, keine Speicherung der Nachricht.
-// Spam-Schutz: Honeypot, Mindest-/Höchstzeit, Limit je IP (nur Hash, max. 1 Stunde).
+// Managed by astro-kit (kit-sync overwrites this file). Changes via PR in astro-kit.
+// Contact form for All-Inkl: PHP mail(), no external service, the message is not stored.
+// Spam protection: honeypot, min/max time, limit per IP (hash only, max. 1 hour).
 declare(strict_types=1);
 
 function back(string $path, int $code = 303): never {
@@ -9,7 +9,7 @@ function back(string $path, int $code = 303): never {
     exit;
 }
 function fail(): never {
-    // zurück zur Seite mit dem Formular (nur gleiche Domain), sonst /kontakt/
+    // back to the page with the form (same domain only), otherwise /kontakt/
     $ref = parse_url((string) ($_SERVER['HTTP_REFERER'] ?? ''));
     $same = isset($ref['host'], $ref['path']) && strcasecmp($ref['host'], (string) ($_SERVER['HTTP_HOST'] ?? '')) === 0;
     $path = $same && preg_match('#^/[A-Za-z0-9/_.-]*$#', $ref['path']) ? $ref['path'] : '/kontakt/';
@@ -31,12 +31,12 @@ if (!is_array($cfg) || empty($cfg['enabled']) || !filter_var($cfg['to'] ?? '', F
     exit;
 }
 
-// Honeypot: Bots füllen das versteckte Feld aus → so tun, als wäre alles ok
+// Honeypot: bots fill in the hidden field → pretend everything is fine
 if (($_POST['website'] ?? '') !== '') {
     back('/danke/');
 }
 
-// Zeitprüfung: mindestens 3 Sekunden, höchstens 1 Tag zwischen Laden und Absenden
+// Time check: at least 3 seconds, at most 1 day between loading and submitting
 $ts = (int) ($_POST['ts'] ?? 0);
 $age = time() - $ts;
 if ($ts <= 0 || $age < 3 || $age > 86400) {
@@ -51,7 +51,7 @@ if ($name === '' || mb_strlen($message) < 10 || ($_POST['privacy'] ?? '') !== '1
     fail();
 }
 
-// Limit: höchstens 5 Nachrichten je IP und Stunde (nur gehashte IP, Datei verfällt)
+// Limit: at most 5 messages per IP and hour (hashed IP only, file expires)
 $ip = (string) ($_SERVER['REMOTE_ADDR'] ?? '');
 $bucket = sys_get_temp_dir() . '/kit-form-' . hash('sha256', $ip . '|' . $cfg['domain'] . '|' . date('YmdH'));
 $count = is_file($bucket) ? (int) file_get_contents($bucket) : 0;

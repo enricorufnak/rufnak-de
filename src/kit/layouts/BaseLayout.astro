@@ -1,8 +1,8 @@
 ---
-// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
-// Rahmen ohne Design: <head> (Titel, Beschreibung, robots, Canonical, Open Graph, Favicon, ggf. PWA), Sprunglink, Einwilligungs-Banner.
-// Header, Footer und Styles kommen aus dem projekteigenen src/layouts/Layout.astro, das diesen Rahmen nutzt.
-// robots kommt nur von hier: noindex-Seiten fallen dadurch automatisch aus der Sitemap (kit() in integration.ts).
+// Managed by astro-kit (kit-sync overwrites this file). Changes via PR in astro-kit.
+// Frame without design: <head> (title, description, robots, canonical, Open Graph, favicon, PWA if enabled), skip link, consent banner.
+// Header, footer and styles come from the project's own src/layouts/Layout.astro, which uses this frame.
+// robots is set only here: noindex pages are therefore left out of the sitemap automatically (kit() in integration.ts).
 import { site } from '../../../site.config';
 import { isNoindex } from '../seo';
 import { analyticsId, ogImagePath } from '../types';
@@ -12,11 +12,11 @@ import '../styles/base.css';
 interface Props {
   title?: string;
   description?: string;
-  /** erzwingt noindex (z. B. aus Frontmatter); sonst gelten die Regeln aus seo.ts */
+  /** forces noindex (e.g. from frontmatter); otherwise the rules from seo.ts apply */
   noindex?: boolean;
-  /** Pfad oder URL eines Vorschaubilds (1200×630) */
+  /** path or URL of a preview image (1200×630) */
   image?: string;
-  /** CSS-Klassen für <body> (z. B. Tailwind) */
+  /** CSS classes for <body> (e.g. Tailwind) */
   bodyClass?: string;
 }
 

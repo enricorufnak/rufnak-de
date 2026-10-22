@@ -1,11 +1,11 @@
-// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
-// Prüft den fertigen Build (dist/) gegen den Indexierungs-Standard:
-//  - jede Seite mit robots noindex fehlt in der Sitemap
-//  - jede indexierbare Seite steht in der Sitemap (außer 404)
-//  - Impressum und Datenschutz existieren, sind indexierbar und in der Sitemap
-//  - robots.txt verweist auf die Sitemap
-//  - bei live: true keine TODO-Angaben im Impressum
-// Aufruf: node src/kit/scripts/check-indexing.mjs [dist]
+// Managed by astro-kit (kit-sync overwrites this file). Changes via PR in astro-kit.
+// Checks the finished build (dist/) against the indexing standard:
+//  - every page with robots noindex is missing from the sitemap
+//  - every indexable page is in the sitemap (except 404)
+//  - imprint and privacy policy exist, are indexable and in the sitemap
+//  - robots.txt points to the sitemap
+//  - with live: true no TODO entries in the imprint
+// Usage: node src/kit/scripts/check-indexing.mjs [dist]
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 
@@ -76,7 +76,7 @@ for (const legal of ['/impressum/', '/datenschutz/']) {
   if (!sitemapUrls.has(legal)) errors.push(`${legal} muss in der Sitemap stehen`);
 }
 
-// Livegang (Startseite indexierbar) nur mit vollständigem Impressum
+// Going live (home page indexable) only with a complete imprint
 const home = join(dist, 'index.html');
 const homeLive = existsSync(home) && !/<meta\s+name=["']robots["']\s+content=["'][^"']*noindex/i.test(readFileSync(home, 'utf8'));
 const impressum = join(dist, 'impressum', 'index.html');

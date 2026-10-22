@@ -1,12 +1,12 @@
 ---
-// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
-// Pflicht-Links für jeden Footer: Kontakt (falls aktiv), Impressum, Datenschutz, Cookie-Einstellungen (falls GA aktiv).
-// In eigenen Footern einbinden: <nav class="…"><LegalLinks linkClass="hover:underline" /></nav>
+// Managed by astro-kit (kit-sync overwrites this file). Changes via PR in astro-kit.
+// Required links for every footer: contact (if enabled), imprint, privacy, cookie settings (if GA is enabled).
+// Use in custom footers: <nav class="…"><LegalLinks linkClass="hover:underline" /></nav>
 import { site } from '../../../site.config';
 import { analyticsId, contactEnabled } from '../types';
 
 interface Props {
-  /** CSS-Klassen für jeden Link (z. B. Tailwind) */
+  /** CSS classes for each link (e.g. Tailwind) */
   linkClass?: string;
 }
 const { linkClass } = Astro.props;

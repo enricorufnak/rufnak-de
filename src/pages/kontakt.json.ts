@@ -1,5 +1,5 @@
-// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
-// Konfiguration für public/kontakt.php. Per .htaccess für Besucher gesperrt.
+// Managed by astro-kit (kit-sync overwrites this file). Changes via PR in astro-kit.
+// Configuration for public/kontakt.php. Blocked for visitors via .htaccess.
 import type { APIRoute } from 'astro';
 import { site } from '../../site.config';
 import { asciiEmail, contactEnabled, legalInfo, siteDomain } from '../kit/types';

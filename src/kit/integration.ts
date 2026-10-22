@@ -1,10 +1,10 @@
-// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
-// Pflicht-Integration für jedes Projekt: astro.config.mjs → integrations: [...kit()]
-// - erzwingt site (aus site.config.ts), trailingSlash 'always' und build.format 'directory' (nicht überschreibbar)
-// - prüft nach dem Build den URL-Standard inkl. Rubriken und das Vorschaubild (og.png)
-// - mit pwa: true in site.config.ts: ruft pwa-kit (Projektordner pwa-kit/) über dist/ auf
-// - Sitemap ohne noindex-Seiten und 301-Weiterleitungen (sitemap.ts, redirects.ts)
-// Ohne kit() bricht der Build in BaseLayout ab.
+// Managed by astro-kit (kit-sync overwrites this file). Changes via PR in astro-kit.
+// Required integration for every project: astro.config.mjs → integrations: [...kit()]
+// - enforces site (from site.config.ts, main domain without trailing /), trailingSlash 'always' and build.format 'directory' (cannot be overridden)
+// - after the build, checks the URL standard incl. sections and the preview image (og.png)
+// - with pwa: true in site.config.ts: runs pwa-kit (project folder pwa-kit/) over dist/
+// - sitemap without noindex pages and 301 redirects (sitemap.ts, redirects.ts)
+// Without kit() the build fails in BaseLayout.
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { createRequire } from 'node:module';
@@ -14,10 +14,10 @@ import type { SitemapOptions } from '@astrojs/sitemap';
 import { site } from '../../site.config';
 import { kitSitemap } from './sitemap';
 import { checkUrls } from './urls';
-import { ogImagePath } from './types';
+import { ogImagePath, siteUrl } from './types';
 
 export interface KitOptions {
-  /** Zusatzoptionen für @astrojs/sitemap (filter wird mit dem noindex-Filter kombiniert) */
+  /** Extra options for @astrojs/sitemap (filter is combined with the noindex filter) */
   sitemap?: SitemapOptions;
 }
 
@@ -29,7 +29,7 @@ export function kit(options: KitOptions = {}): AstroIntegration[] {
     hooks: {
       'astro:config:setup': ({ updateConfig }) => {
         updateConfig({
-          site: site.url,
+          site: siteUrl(site),
           trailingSlash: 'always',
           build: { format: 'directory' },
           vite: { define: { 'import.meta.env.KIT_CORE': JSON.stringify('1') } },
@@ -42,7 +42,7 @@ export function kit(options: KitOptions = {}): AstroIntegration[] {
           if (!existsSync(kitFile)) {
             throw new Error(`site.config.ts: pwa ist true, aber pwa-kit/ fehlt im Projekt. → deploy-tool pwa-sync ${site.id}`);
           }
-          // Node lädt das Modul selbst (require von ESM, Node ≥ 22.12): Vites Modul-Lader der Config ist hier schon geschlossen
+          // Node loads the module itself (require of ESM, Node ≥ 22.12): Vite's config module loader is already closed here
           ({ buildPwa } = createRequire(import.meta.url)(kitFile));
         }
         if (config.trailingSlash !== 'always' || config.build.format !== 'directory') {

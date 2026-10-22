@@ -1,10 +1,10 @@
-// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
-// Indexierungs-Standard P01–P12:
-// - Impressum und Datenschutz sind immer indexierbar und in der Sitemap
-// - noindex für Platzhalter (live: false), Danke-/Bestätigungsseiten, interne Suche, Vorschauen, 404
-//   sowie jede Seite, der das Layout noindex übergibt (z. B. aus dem Frontmatter)
-// - Einzige Quelle ist <meta name="robots"> in der gebauten Seite: kitSitemap() (sitemap.ts) lässt alle noindex-Seiten
-//   automatisch aus der Sitemap, check-indexing.mjs prüft das im Build.
+// Managed by astro-kit (kit-sync overwrites this file). Changes via PR in astro-kit.
+// Indexing standard P01–P12:
+// - imprint and privacy policy are always indexable and in the sitemap
+// - noindex for placeholders (live: false), thank-you/confirmation pages, internal search, previews, 404
+//   and every page the layout passes noindex to (e.g. from frontmatter)
+// - The only source is <meta name="robots"> in the built page: kitSitemap() (sitemap.ts) leaves out all noindex pages
+//   automatically, check-indexing.mjs verifies this in the build.
 import type { SiteConfig } from './types';
 
 export const ALWAYS_INDEX = ['/impressum/', '/datenschutz/'];
@@ -20,7 +20,7 @@ export function normalizePath(path: string): string {
   return p;
 }
 
-/** Regel aus site.config.ts (ohne Seiten-Prop): Rechtsseiten immer, sonst nur wenn live */
+/** Rule from site.config.ts (without page prop): legal pages always, otherwise only when live */
 export function isNoindex(path: string, site: SiteConfig): boolean {
   const p = normalizePath(path);
   if (ALWAYS_INDEX.includes(p)) return false;

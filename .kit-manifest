@@ -1,4 +1,4 @@
-# astro-kit 66a5afcf0751a4935395994a9727f14ced3cf99a – von deploy-tool verwaltet, nicht von Hand ändern
+# astro-kit 37043808a31539d278308d5a3e76f34b2ae66452 – managed by deploy-tool, do not edit by hand
 public/.htaccess
 public/kontakt.php
 src/kit/components/ContactForm.astro
