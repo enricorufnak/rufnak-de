@@ -1,6 +1,6 @@
-/* Design von rufnak.de – gehört dem Projekt, wird von kit-sync nicht überschrieben.
-   Palette "Graphit & Senf", Schriften Lora + Karla + Caveat (lokal). Vorschaubild: docs/og-vorlage.html → public/og.png.
-   Bewusst nur ein (helles) Farbschema mit dunkler Seitenleiste. */
+/* Design of rufnak.de – owned by the project, not overwritten by kit-sync.
+   Palette "Graphit & Senf", fonts Lora + Karla + Caveat (local). Preview image: docs/og-vorlage.html → public/og.png.
+   Intentionally a single (light) color scheme with a dark sidebar. */
 :root {
   --side: #2b2f33;
   --side2: #22262a;
@@ -10,12 +10,12 @@
   --muted: #686d72;
   --soft: #e7e7e2;
   --mustard: #d9a521;
-  --mustard-ink: #8a6508; /* Senf als Text auf Hell (Kontrast ≥ 4,5:1) */
+  --mustard-ink: #8a6508; /* mustard as text on light backgrounds (contrast ≥ 4.5:1) */
   --hand: #f2c94c;
   --serif: 'Lora', Georgia, serif;
   --sans: 'Karla', system-ui, sans-serif;
   --hand-font: 'Caveat', cursive;
-  /* Kit-Variablen (Kit-Seiten, Skip-Link) auf die Palette legen */
+  /* map kit variables (kit pages, skip link) to the palette */
   --kit-bg: var(--page);
   --kit-surface: var(--card);
   --kit-text: var(--ink);
@@ -35,7 +35,7 @@ img { max-width: 100%; height: auto; }
 :focus-visible { outline: 2px solid var(--mustard); outline-offset: 3px; border-radius: 6px; }
 .app { display: grid; grid-template-columns: 310px 1fr; min-height: 100vh; }
 
-/* Seitenleiste */
+/* Sidebar */
 aside { background: var(--side); color: #fff; padding: 36px 28px; display: flex; flex-direction: column; gap: 26px; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
 aside a { text-decoration: none; }
 .photo { width: 160px; aspect-ratio: 1; border-radius: 50%; background: var(--side2); color: #4a5056; overflow: hidden; box-shadow: 0 0 0 6px rgba(255, 255, 255, .1); flex: none; }
@@ -59,7 +59,7 @@ aside dd a:hover { text-decoration: underline; text-decoration-color: var(--must
 .chips.links a { display: inline-block; font-weight: 700; transition: background .15s; }
 .chips.links a:hover { background: var(--mustard); color: var(--ink); }
 
-/* Inhalt */
+/* Content */
 main { min-width: 0; padding-block: clamp(24px, 5vw, 56px) 40px; padding-inline: max(16px, clamp(16px, 5vw, 60px)); }
 .wrap { max-width: 900px; display: grid; gap: 64px; }
 section { scroll-margin-top: 24px; }
@@ -80,7 +80,7 @@ section { scroll-margin-top: 24px; }
 .s small { font-family: var(--sans); font-weight: 400; font-size: .95rem; color: var(--muted); }
 .sub { font-family: var(--serif); font-weight: 600; font-size: 1.15rem; margin: 32px 0 16px; }
 
-/* Zeitleiste */
+/* Timeline */
 .tl { position: relative; display: grid; gap: 14px; padding: 0 0 0 28px; margin: 0; list-style: none; }
 .tl::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--soft); }
 .tl li { position: relative; background: var(--card); border-radius: 14px; padding: 14px 18px; display: flex; justify-content: space-between; gap: 4px 16px; flex-wrap: wrap; }
@@ -101,7 +101,7 @@ section { scroll-margin-top: 24px; }
 .cert b { font-size: .92rem; }
 .cert small { color: var(--muted); font-variant-numeric: tabular-nums; }
 
-/* Kenntnisse */
+/* Skills */
 .skillgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
 .skill { background: var(--card); border-radius: 18px; padding: 20px; display: grid; gap: 10px; align-content: start; }
 .skill h3 { font-family: var(--serif); font-weight: 600; font-size: 1.1rem; margin: 0; }
@@ -122,14 +122,14 @@ section { scroll-margin-top: 24px; }
 .flow .out { display: grid; gap: 8px; }
 .flow .out div { background: var(--mustard); color: var(--ink); border-radius: 10px; padding: 8px 12px; font-weight: 700; font-size: .92rem; }
 
-/* Stimmen */
+/* Testimonials */
 .quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
 .quotes figure { margin: 0; background: var(--card); border-radius: 18px; padding: 22px; display: grid; gap: 14px; align-content: space-between; position: relative; }
 .quotes figure::before { content: '“'; position: absolute; top: -6px; left: 16px; font-family: var(--serif); font-size: 4rem; line-height: 1; color: var(--mustard); }
 .quotes blockquote { margin: 14px 0 0; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.05rem; line-height: 1.5; }
 .quotes figcaption { font-size: .85rem; color: var(--muted); font-weight: 700; }
 
-/* Kontakt */
+/* Contact */
 .contact { background: var(--side); color: #fff; border-radius: 24px; padding: clamp(22px, 4vw, 40px); display: grid; grid-template-columns: 1fr 1.2fr; gap: 28px; }
 .contact h1, .contact h3 { font-family: var(--serif); font-weight: 500; font-size: 1.9rem; margin: 0 0 8px; }
 .contact .hand { font-family: var(--hand-font); font-weight: 600; color: var(--hand); font-size: 1.5rem; }
@@ -143,13 +143,13 @@ section { scroll-margin-top: 24px; }
 .copy:hover { background: var(--mustard); color: var(--ink); }
 .copy[hidden] { display: none; }
 
-/* Fuß */
+/* Footer */
 .site-footer { color: var(--muted); font-size: .85rem; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--soft); padding-top: 18px; }
 .ftr-links { display: flex; gap: 14px; flex-wrap: wrap; }
 .site-footer a { color: inherit; text-decoration: underline; text-decoration-color: var(--mustard); text-underline-offset: 3px; }
 .site-footer a:hover { color: var(--ink); }
 
-/* Kit-Seiten (Impressum, Datenschutz, 404) im Stil der Seite */
+/* Kit pages (imprint, privacy, 404) in the site style */
 .kit-page { max-width: 760px; }
 .kit-page h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(2rem, 4.4vw, 3.1rem); line-height: 1.12; margin: 6px 0 24px; }
 .kit-legal::before { content: 'Rechtliches'; display: block; font-family: var(--hand-font); font-weight: 600; font-size: 1.6rem; color: var(--mustard-ink); line-height: 1; }

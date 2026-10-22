@@ -1,4 +1,4 @@
-// Projekt-Einstellungen P11 rufnak.de – gehört dem Projekt, wird von kit-sync nicht überschrieben.
+// Project settings P11 rufnak.de – owned by the project, not overwritten by kit-sync.
 import { defineSite } from './src/kit/types';
 
 export const site = defineSite({
@@ -7,25 +7,25 @@ export const site = defineSite({
   url: 'https://www.rufnak.de',
   description: 'Enrico Rufnak, Softwareentwickler aus Potsdam: Werdegang, Kenntnisse, Zertifikate und Kontakt. Webanwendungen von der Idee bis zum laufenden System.',
   lang: 'de',
-  // false = Platzhalter-Phase: alles außer Impressum/Datenschutz ist noindex. Beim Livegang auf true setzen.
+  // false = placeholder phase: everything except imprint/privacy is noindex. Set to true at launch.
   live: false,
   nav: [],
   themeColor: '#2b2f33',
-  // Impressum/Datenschutz: zentrale Betreiberdaten aus src/kit/operator.ts, E-Mail automatisch info@rufnak.de
-  // (Postfach muss bei All-Inkl existieren). Umlaut-Domain: Punycode-Schreibweise erscheint automatisch als Zweitform.
-  // Hier nur Abweichungen für dieses Projekt, z. B. MStV-Verantwortlicher bei Ratgeber-Inhalten:
+  // Imprint/privacy: central operator data from src/kit/operator.ts, email defaults to info@rufnak.de
+  // (mailbox must exist at All-Inkl). Umlaut domain: the punycode spelling is added automatically as a second form.
+  // Only project-specific overrides here, e.g. MStV responsible person for editorial content:
   // legal: { responsible: { name: 'Enrico Rufnak' } },
   legal: { email: 'enrico@rufnak.de', phone: '+49 177 4233525' },
-  // Google Analytics 4 – Standard aus. Zum Aktivieren: enabled: true und Mess-ID (z. B. 'G-ABC123').
-  // Geladen wird GA erst nach Zustimmung im Banner; der Datenschutz-Abschnitt erscheint automatisch.
+  // Google Analytics 4 – off by default. To enable: enabled: true and measurement ID (e.g. 'G-ABC123').
+  // GA loads only after consent in the banner; the privacy section is added automatically.
   analytics: { enabled: false, ga4Id: '' },
-  // Kontaktformular – Standard aus. enabled: true legt /kontakt/ an, verlinkt sie im Footer und ergänzt den Datenschutz.
-  // to: Empfänger (Standard: E-Mail aus dem Impressum); from: Absender, muss bei All-Inkl als Postfach/Alias existieren (Standard: noreply@Domain)
-  // rufnak.de: bleibt aus, solange es src/pages/kontakt.astro gibt (beide erzeugen /kontakt/ → Build-Fehler).
+  // Contact form – off by default. enabled: true creates /kontakt/, links it in the footer and extends the privacy policy.
+  // to: recipient (default: imprint email); from: sender, must exist at All-Inkl as mailbox/alias (default: noreply@domain)
+  // rufnak.de: stays off as long as src/pages/kontakt.astro exists (both generate /kontakt/ → build error).
   contact: { enabled: false },
-  // 301-Weiterleitungen alt → neu (z. B. alte URLs nach einem Relaunch), Ziel muss es im Build geben:
+  // 301 redirects old → new (e.g. old URLs after a relaunch), the target must exist in the build:
   // redirects: { '/ueber.html': '/ueber-mich/' },
-  // Alte Laravel-URLs (bis 2026): /kontakt, /impressum und / bleiben, der Rest geht in einem Sprung aufs neue Ziel.
+  // Old Laravel URLs (until 2026): /kontakt, /impressum and / stay, the rest redirects to the new target in one hop.
   redirects: {
     '/datenschutzerklaerung': '/datenschutz/',
     '/feedback': '/kontakt/',
@@ -35,13 +35,13 @@ export const site = defineSite({
     '/portfolio': '/',
     '/blog': '/',
   },
-  // Rubriken: Unterseiten (zwei oder mehr Ebenen) nur unter diesen Pfaden, z. B. ['ratgeber'] → /ratgeber/…/
-  // Pfad-Segmente mit slugify() aus src/kit/urls.ts bilden (ä→ae, Leerzeichen → Bindestrich).
+  // Sections: nested pages (two or more levels) only below these paths, e.g. ['ratgeber'] → /ratgeber/…/
+  // Build path segments with slugify() from src/kit/urls.ts (ä→ae, space → hyphen).
   sections: [],
-  // Standard-Vorschaubild für Seiten ohne eigenes Bild (1200×630 px). Datei: public/og.png, Pflicht vor dem Livegang.
+  // Default preview image for pages without their own image (1200×630 px). File: public/og.png, required before launch.
   ogImage: '/og.png',
-  // Installierbare App (pwa-kit) – Standard aus. Vorher: deploy-tool pwa-sync P11, pwa.config.json und Icons füllen.
+  // Installable app (pwa-kit) – off by default. First: deploy-tool pwa-sync P11, fill in pwa.config.json and icons.
   pwa: false,
-  // zusätzliche noindex-Pfade, z. B. ['/suche/']
+  // additional noindex paths, e.g. ['/suche/']
   noindex: [],
 });

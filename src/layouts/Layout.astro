@@ -1,12 +1,12 @@
 ---
-// Seitenrahmen von rufnak.de – gehört dem Projekt (Design frei änderbar), wird von kit-sync nicht überschrieben.
-// Pflicht: diese Props an BaseLayout durchreichen und <main id="inhalt"> setzen (Kit-Seiten nutzen dieses Layout).
-// Der Footer enthält <LegalLinks /> (Impressum, Datenschutz, ggf. Kontakt/Cookies).
-// Aufbau: Seitenleiste (Foto, Name, Navigation, Kontakt, Kenntnisse) links, Inhalt rechts; unter 900 px Leiste oben.
+// Page frame of rufnak.de – owned by the project (design can be changed freely), not overwritten by kit-sync.
+// Required: pass these props through to BaseLayout and keep <main id="inhalt"> (kit pages use this layout).
+// The footer contains <LegalLinks /> (imprint, privacy, contact/cookies if enabled).
+// Structure: sidebar (photo, name, navigation, contact, Kenntnisse) on the left; content on the right; below 900 px the sidebar moves above it.
 import BaseLayout from '../kit/layouts/BaseLayout.astro';
 import LegalLinks from '../kit/components/LegalLinks.astro';
 import { kontakt, profile, sidebarSkills } from '../data/profil';
-// Schriften lokal (keine Verbindung zu Google): nur lateinische Zeichensätze
+// Fonts served locally (no connection to Google): Latin subsets only
 import '@fontsource/lora/latin-500.css';
 import '@fontsource/lora/latin-ext-500.css';
 import '@fontsource/lora/latin-600.css';
@@ -32,7 +32,7 @@ interface Props {
 const year = new Date().getFullYear();
 const path = Astro.url.pathname;
 const isHome = path === '/';
-// Startseite: Anker auf derselben Seite, sonst zurück zur Startseite
+// Home page: anchors on the same page, otherwise link back to the home page
 const nav = [
   { label: 'Über mich', href: isHome ? '#ueber' : '/#ueber' },
   { label: 'Mein Weg', href: isHome ? '#weg' : '/#weg' },
@@ -89,7 +89,7 @@ const nav = [
   <div class="toast" id="toast" role="status" hidden></div>
 
   <script>
-    // Kopieren-Buttons (Progressive Enhancement): ohne Clipboard-API Text markieren
+    // Copy buttons (progressive enhancement): select the text if the Clipboard API is unavailable
     const toast = document.getElementById('toast') as HTMLElement;
     let timer: ReturnType<typeof setTimeout> | undefined;
     const show = (msg: string) => {

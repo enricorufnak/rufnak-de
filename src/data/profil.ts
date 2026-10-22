@@ -1,4 +1,4 @@
-// Inhalte von rufnak.de (Lebenslauf, Kenntnisse, Kontakt) – Texte zeitlos halten, Arbeitgeber nur im Werdegang.
+// Content of rufnak.de (CV, skills, contact) – keep texts timeless, name employers only in the career timeline.
 
 export const kontakt = {
   email: 'enrico@rufnak.de',
@@ -10,7 +10,7 @@ export const kontakt = {
   geburtstag: '29.09.1984',
 };
 
-// Profile (Links wie auf der alten Seite)
+// Profiles (links as on the old site)
 export const profile = [
   { name: 'GitHub', url: 'https://github.com/enricorufnak' },
   { name: 'LinkedIn', url: 'https://www.linkedin.com/in/enricorufnak' },

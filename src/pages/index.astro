@@ -1,11 +1,11 @@
 ---
-// Startseite: Über mich, Mein Weg, Zertifikate, Kenntnisse, Was andere sagen, Kontakt. Inhalte: src/data/profil.ts
+// Home page: about, career, certificates, skills, testimonials, contact. Content: src/data/profil.ts
 import Layout from '../layouts/Layout.astro';
 import Kontakt from '../components/Kontakt.astro';
 import { ausbildung, eigenschaften, kenntnisse, profile, sprachen, stimmen, werdegang, zertifikate } from '../data/profil';
 import { site } from '../../site.config';
 
-// Strukturierte Daten (Person) für die Namenssuche
+// Structured data (Person) for name searches
 const person = {
   '@context': 'https://schema.org',
   '@type': 'Person',

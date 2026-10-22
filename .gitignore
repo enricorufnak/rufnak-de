@@ -1,15 +1,15 @@
-# Betriebssystem
+# Operating system
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# IDEs / Editoren
+# IDEs / editors
 .idea/
 *.iml
 .vscode/
 *.swp
 
-# Umgebungsvariablen und Zugangsdaten – niemals committen
+# Environment variables and credentials – never commit
 .env
 .env.*
 !.env.example
@@ -17,18 +17,18 @@ desktop.ini
 *.key
 secrets/
 
-# Logs und temporäre Dateien
+# Logs and temporary files
 *.log
 logs/
 tmp/
 *.tmp
 *.bak
 
-# Abhängigkeiten
+# Dependencies
 node_modules/
 vendor/
 
-# Build-Ergebnisse
+# Build output
 dist/
 build/
 .cache/
