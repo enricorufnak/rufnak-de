@@ -1,9 +1,9 @@
 ---
-// Kontakt-Block (Startseite und /kontakt/). Kopieren-Buttons nur mit JS, die Daten stehen auch ohne JS da.
+// Contact block (home page and /kontakt/). Copy buttons only with JS; the data is visible without JS too.
 import { kontakt, profile } from '../data/profil';
 
 interface Props {
-  /** Überschrift-Ebene: h1 auf /kontakt/ (dort ist "Kontakt" die Seitenüberschrift), sonst h3 */
+  /** Heading level: h1 on /kontakt/ (where "Kontakt" is the page heading), otherwise h3 */
   heading?: 'h1' | 'h3';
 }
 const { heading = 'h3' } = Astro.props;
