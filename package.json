@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check:indexing": "node src/kit/scripts/check-indexing.mjs",
-    "ci": "astro build && node src/kit/scripts/check-indexing.mjs"
+    "check:drafts": "node scripts/check-drafts.mjs",
+    "ci": "astro build && node src/kit/scripts/check-indexing.mjs && node scripts/check-drafts.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.4",

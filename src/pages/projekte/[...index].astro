@@ -1,0 +1,68 @@
+---
+// /projekte/ – project overview with category filter. Only built once at least one project is published.
+import Layout from '../../layouts/Layout.astro';
+import { getPublishedProjects, projektNummer, projektUrl } from '../../lib/projekte';
+
+export async function getStaticPaths() {
+  return (await getPublishedProjects()).length ? [{ params: { index: undefined } }] : [];
+}
+
+const projekte = await getPublishedProjects();
+const kategorien = [...new Set(projekte.map((p) => p.data.kategorie))];
+---
+
+<Layout
+  title="Projekte – Enrico Rufnak"
+  description="Projekte von Enrico Rufnak: Websites, Ratgeber, Online-Rechner und Software, jeweils mit Steckbrief zu Idee, Umsetzung und Technik."
+>
+  <section aria-labelledby="projekte-titel">
+    <div class="eyebrow">Projekte</div>
+    <h1 class="big" id="projekte-titel">Woran ich arbeite</h1>
+    <p class="lead">Eigene Projekte, von Ratgebern und Online-Rechnern bis zu Software für Vereine. Zu jedem gibt es einen Steckbrief.</p>
+    {
+      kategorien.length > 1 && (
+        <div class="filters" role="group" aria-label="Projekte filtern" hidden>
+          <button type="button" data-kategorie="" aria-pressed="true">Alle<span>{projekte.length}</span></button>
+          {kategorien.map((k) => (
+            <button type="button" data-kategorie={k} aria-pressed="false">
+              {k}<span>{projekte.filter((p) => p.data.kategorie === k).length}</span>
+            </button>
+          ))}
+        </div>
+      )
+    }
+    <ul class="proj">
+      {
+        projekte.map((p) => (
+          <li data-kategorie={p.data.kategorie}>
+            <a class="card" href={projektUrl(p)}>
+              <span class="top">
+                <span class="num">{projektNummer(p)}</span>
+                <span class="cat">{p.data.draft ? `Entwurf · ${p.data.kategorie}` : p.data.kategorie}</span>
+              </span>
+              <h2>{p.data.titel}</h2>
+              <p>{p.data.beschreibung}</p>
+              <span class="more">Steckbrief ansehen →</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <script>
+    // Category filter (progressive enhancement): without JS all projects are listed and the buttons stay hidden
+    const filters = document.querySelector<HTMLElement>('.filters');
+    if (filters) {
+      filters.hidden = false;
+      const items = document.querySelectorAll<HTMLElement>('.proj li');
+      filters.addEventListener('click', (e) => {
+        const b = (e.target as Element).closest<HTMLButtonElement>('button');
+        if (!b) return;
+        const k = b.dataset.kategorie;
+        filters.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+        items.forEach((li) => (li.hidden = !!k && li.dataset.kategorie !== k));
+      });
+    }
+  </script>
+</Layout>

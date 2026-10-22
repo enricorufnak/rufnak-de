@@ -28,6 +28,10 @@ npm run ci     # Build + Indexierungs-Prüfung (wie der Build-Check im PR)
 
 `live: false`: alle Seiten außer Impressum und Datenschutz sind noindex. Inhalte stehen in `src/data/profil.ts`. Für `live: true` (Livegang W9): fertige Texte, Impressum ohne TODO, `og.png` aktuell. Gemeinsame Teile (`src/kit/`, `.kit-manifest`) nur über `deploy-tool kit-sync P11` aktualisieren.
 
+## Projekte
+
+Je Projekt eine Datei `src/content/projekte/<slug>.md` (Dateiname = URL `/projekte/<slug>/`, nach dem Livegang nie ändern). Felder siehe `src/content.config.ts`. Neue Projekte mit `draft: true`: kein Build, keine Sitemap, kein Link. `npm run dev` zeigt Entwürfe zur Kontrolle mit Hinweis „Entwurf“. Freigeben mit `draft: false`; Navigation „Projekte“, `/projekte/` und der Footer-Link „Über diese Seite“ erscheinen erst mit dem ersten veröffentlichten Projekt. `npm run ci` prüft, dass kein Entwurf im Build steht.
+
 ## Hinweise
 
 - Zugangsdaten und Passwörter gehören in eine `.env`-Datei – die wird nicht committet.
