@@ -1,10 +1,10 @@
 ---
-// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
-// Google Analytics wird erst nach ausdrücklicher Einwilligung geladen (§ 25 Abs. 1 TDDDG, Art. 6 Abs. 1 lit. a DSGVO).
-// Die Entscheidung liegt nur im localStorage des Browsers (kein Cookie, kein Server).
-// Google Consent Mode v2 (Basis-Modus): vor dem Laden alle vier Signale „denied“, nach Zustimmung nur
-// analytics_storage „granted“. Ohne Zustimmung wird gtag.js gar nicht geladen (keine cookielosen Pings).
-// Werbung (AdSense) braucht stattdessen eine Google-zertifizierte TCF-CMP, siehe README.
+// Managed by astro-kit (kit-sync overwrites this file). Changes via PR in astro-kit.
+// Google Analytics loads only after explicit consent (§ 25(1) TDDDG, Art. 6(1)(a) GDPR).
+// The choice is stored only in the browser's localStorage (no cookie, no server).
+// Google Consent Mode v2 (basic mode): all four signals "denied" before loading, after consent only
+// analytics_storage "granted". Without consent gtag.js is not loaded at all (no cookieless pings).
+// Advertising (AdSense) needs a Google-certified TCF CMP instead, see README.
 interface Props {
   ga4Id: string;
 }
@@ -64,7 +64,7 @@ const { ga4Id } = Astro.props;
         banner.hidden = true;
         if (v === 'granted') load();
         else if (wasGranted) {
-          // Widerruf: Signal an Google, dann Seite ohne GA neu laden
+          // Withdrawal: signal Google, then reload the page without GA
           if (window.gtag) window.gtag('consent', 'update', { analytics_storage: 'denied' });
           location.reload();
         }

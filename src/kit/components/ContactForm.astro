@@ -1,6 +1,6 @@
 ---
-// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
-// Sendet an /kontakt.php (All-Inkl, PHP mail()). Spam-Schutz: Honeypot, Mindestzeit, Limit je IP.
+// Managed by astro-kit (kit-sync overwrites this file). Changes via PR in astro-kit.
+// Posts to /kontakt.php (All-Inkl, PHP mail()). Spam protection: honeypot, minimum time, limit per IP.
 import { site } from '../../../site.config';
 import { contactEnabled, legalInfo } from '../types';
 const enabled = contactEnabled(site);

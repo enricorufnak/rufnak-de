@@ -1,5 +1,5 @@
-// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
-// Kein Disallow: Suchmaschinen müssen noindex-Seiten lesen können, um sie auszuschließen.
+// Managed by astro-kit (kit-sync overwrites this file). Changes via PR in astro-kit.
+// No Disallow: search engines must be able to read noindex pages in order to exclude them.
 import type { APIRoute } from 'astro';
 import { site } from '../../site.config';
 

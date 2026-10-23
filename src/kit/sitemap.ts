@@ -1,5 +1,5 @@
-// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
-// Sitemap ohne noindex-Seiten – nur für astro.config.mjs (läuft im Build, nicht im Browser).
+// Managed by astro-kit (kit-sync overwrites this file). Changes via PR in astro-kit.
+// Sitemap without noindex pages – for astro.config.mjs only (runs during the build, not in the browser).
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -8,7 +8,7 @@ import sitemap, { type SitemapOptions } from '@astrojs/sitemap';
 import { NOINDEX_META, normalizePath } from './seo';
 import { kitRedirects } from './redirects';
 
-/** URL-Pfade aller gebauten Seiten mit robots noindex */
+/** URL paths of all built pages with robots noindex */
 export function noindexPaths(distDir: string): Set<string> {
   const paths = new Set<string>();
   for (const entry of readdirSync(distDir, { recursive: true })) {
@@ -20,9 +20,9 @@ export function noindexPaths(distDir: string): Set<string> {
 }
 
 /**
- * Sitemap ohne noindex-Seiten + 301-Weiterleitungen aus site.config.ts → redirects.
- * Teil von kit() (integration.ts) – Projekte binden kit() ein, nicht diese Funktion.
- * (Reihenfolge nicht ändern: der Scan muss vor der Sitemap laufen.)
+ * Sitemap without noindex pages + 301 redirects from site.config.ts → redirects.
+ * Part of kit() (integration.ts) – projects include kit(), not this function.
+ * (Do not change the order: the scan must run before the sitemap.)
  */
 export function kitSitemap(options: SitemapOptions = {}): AstroIntegration[] {
   let noindex = new Set<string>();

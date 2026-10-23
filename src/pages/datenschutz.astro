@@ -1,8 +1,8 @@
 ---
-// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
-// Vorlage für Websites auf All-Inkl ohne Nutzerkonten – vor dem Livegang rechtlich prüfen lassen.
-// Abschnitte für Analytics und Kontaktformular erscheinen nur, wenn sie in site.config.ts aktiv sind;
-// „Keine Cookies“ nur ohne Analytics und ohne PWA (Service Worker speichert auf dem Gerät).
+// Managed by astro-kit (kit-sync overwrites this file). Changes via PR in astro-kit.
+// Template for websites on All-Inkl without user accounts – have it legally reviewed before going live.
+// Sections for analytics and the contact form appear only if they are enabled in site.config.ts;
+// "No cookies" only without analytics and without PWA (the service worker stores data on the device).
 import Layout from '../layouts/Layout.astro';
 import { site } from '../../site.config';
 import { analyticsId, contactEnabled, legalInfo } from '../kit/types';
@@ -17,7 +17,7 @@ const ipText = {
   anonymized: 'IP-Adresse (vollständig anonymisiert als 0.0.0.0)',
   none: '',
 };
-// Abschnittsnummern fortlaufend, je nachdem welche Abschnitte erscheinen
+// Section numbers are consecutive, depending on which sections appear
 let n = 0;
 const nr = () => `${++n}.`;
 ---

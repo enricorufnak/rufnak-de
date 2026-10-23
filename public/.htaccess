@@ -1,5 +1,5 @@
-# Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
-# All-Inkl (Apache). Document Root: <domain>/current/public
+# Managed by astro-kit (kit-sync overwrites this file). Changes via PR in astro-kit.
+# All-Inkl (Apache). Document root: <domain>/current/public
 
 Options -Indexes
 DirectoryIndex index.html index.php
@@ -7,13 +7,13 @@ ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  # Anfrage kam per HTTPS (direkt oder hinter Proxy)?
+  # Did the request arrive via HTTPS (directly or behind a proxy)?
   RewriteCond %{HTTPS} =on [OR]
   RewriteCond %{HTTP:X-Forwarded-Proto} =https
   RewriteRule ^ - [E=KIT_HTTPS:1]
-  # Projekt-Weiterleitungen (alte URLs) – setzt der Build hier ein, direkt auf https://www. (ein Sprung)
+  # Project redirects (old URLs) – inserted here by the build, straight to https://www. (one hop)
   # KIT_REDIRECTS
-  # http und/oder ohne www → https://www. in einem Sprung (URL-Standard); staging.* bleibt (deploy-tool --staging)
+  # http and/or without www → https://www. in one hop (URL standard); staging.* stays (deploy-tool --staging)
   RewriteCond %{ENV:KIT_HTTPS} !=1 [OR]
   RewriteCond %{HTTP_HOST} !^www\. [NC]
   RewriteCond %{HTTP_HOST} !^staging\. [NC]
@@ -21,7 +21,7 @@ ErrorDocument 404 /404.html
   RewriteRule ^ https://www.%1%{REQUEST_URI} [R=301,L,NE]
 </IfModule>
 
-# Interne Dateien sperren
+# Block internal files
 <FilesMatch "^(kontakt\.json|REVISION)$|^\.">
   Require all denied
 </FilesMatch>
@@ -33,19 +33,19 @@ ErrorDocument 404 /404.html
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
   Header always set Cross-Origin-Opener-Policy "same-origin"
-  # 'unsafe-inline' für Astros eingebettete Skripte/Styles; Google nur für GA nach Einwilligung
+  # 'unsafe-inline' for Astro's inlined scripts/styles; Google only for GA after consent
   Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-src 'none'; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
   Header unset X-Powered-By
 </IfModule>
 
-# Staging-Subdomain nie indexieren (Passwortschutz setzt deploy-tool voraus)
+# Never index the staging subdomain (deploy-tool requires password protection)
 <IfModule mod_headers.c>
   <If "%{HTTP_HOST} =~ /^staging\./i">
     Header always set X-Robots-Tag "noindex, nofollow"
   </If>
 </IfModule>
 
-# pwa-kit (nur aktiv mit pwa: true): sw.js und Manifest nie aus dem Browser-Cache, sonst kommen Updates verspätet an
+# pwa-kit (only active with pwa: true): never serve sw.js and the manifest from the browser cache, otherwise updates arrive late
 <IfModule mod_headers.c>
   <FilesMatch "^(sw\.js|manifest\.webmanifest)$">
     Header set Cache-Control "no-cache"
@@ -67,7 +67,7 @@ ErrorDocument 404 /404.html
   ExpiresByType font/woff2 "access plus 1 year"
 </IfModule>
 
-# Astro-Assets haben Hash im Namen → dauerhaft cachen
+# Astro assets have a hash in their name → cache permanently
 <IfModule mod_headers.c>
   <If "%{REQUEST_URI} =~ m#^/_astro/#">
     Header set Cache-Control "public, max-age=31536000, immutable"

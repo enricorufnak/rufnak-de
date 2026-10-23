@@ -1,4 +1,4 @@
-// Von astro-kit verwaltet (kit-sync überschreibt diese Datei). Änderungen per PR im astro-kit.
+// Managed by astro-kit (kit-sync overwrites this file). Changes via PR in astro-kit.
 
 export interface NavItem {
   label: string;
@@ -9,71 +9,71 @@ import { domainToASCII, domainToUnicode } from 'node:url';
 import { operator } from './operator';
 
 export interface LegalInfo {
-  /** Name des Betreibers (natürliche Person oder Firma) */
+  /** Operator name (natural person or company) */
   owner: string;
   street: string;
   zip: string;
   city: string;
   country?: string;
-  /** E-Mail im Impressum. Standard: info@<Projektdomain> (aus site.url, ohne www) */
+  /** Imprint email. Default: info@<project domain> (from site.url, without www) */
   email?: string;
-  /** Zweite Schreibweise der E-Mail, z. B. Punycode bei Umlaut-Domains.
-   *  Standard: automatisch info@xn--… , wenn die Domain Umlaute enthält; sonst keine. */
+  /** Second spelling of the email, e.g. punycode for umlaut domains.
+   *  Default: automatically info@xn--… if the domain contains umlauts; otherwise none. */
   emailAlt?: string;
   phone?: string;
-  /** USt-IdNr., falls vorhanden */
+  /** VAT ID, if available */
   vatId?: string;
-  /** Rechtsform, falls angegeben werden soll (z. B. Einzelunternehmen, UG) */
+  /** Legal form, if it should be shown (e.g. Einzelunternehmen, UG) */
   legalForm?: string;
-  /** Vertretungsberechtigte Person (bei Gesellschaften/Vereinen) */
+  /** Authorized representative (for companies/associations) */
   representative?: string;
-  /** Registereintrag (Handels-/Vereinsregister) */
+  /** Register entry (commercial/association register) */
   register?: { court: string; number: string };
-  /** Verantwortlich nach § 18 Abs. 2 MStV (journalistisch-redaktionelle Inhalte, z. B. Ratgeber); Anschrift wie Betreiber, falls nicht angegeben */
+  /** Responsible person under § 18(2) MStV (journalistic-editorial content, e.g. guides); address as operator if not given */
   responsible?: { name: string; address?: string };
-  /** Hinweis zur Verbraucherstreitbeilegung (§ 36 VSBG): 'unwilling' = nicht bereit/verpflichtet, 'none' = kein Hinweis */
+  /** Consumer dispute resolution notice (§ 36 VSBG): 'unwilling' = not willing/obliged, 'none' = no notice */
   consumerDispute?: 'unwilling' | 'none';
-  /** Zuständige Datenschutz-Aufsichtsbehörde (Sitz des Betreibers), erscheint im Datenschutz beim Beschwerderecht */
+  /** Competent data protection authority (operator's location), shown in the privacy policy under the right to lodge a complaint */
   supervisoryAuthority?: { name: string; address: string };
-  /** Server-Logs laut KAS (Einstellungen → Logs & Statistiken), erscheint im Datenschutz.
-   *  ip: 'full' = vollständig, 'shortened' = 11.22.0.0, 'anonymized' = 0.0.0.0, 'none' = keine Logs;
-   *  retentionDays: Aufbewahrungsdauer; statistics: Zugriffsstatistik aus den Logs */
+  /** Server logs as configured in KAS (Settings → Logs & statistics), shown in the privacy policy.
+   *  ip: 'full' = complete, 'shortened' = 11.22.0.0, 'anonymized' = 0.0.0.0, 'none' = no logs;
+   *  retentionDays: retention period; statistics: access statistics from the logs */
   serverLogs?: { ip: 'full' | 'shortened' | 'anonymized' | 'none'; retentionDays: number; statistics?: boolean };
 }
 
 export interface SiteConfig {
-  /** Projekt-ID, z. B. P01 */
+  /** Project ID, e.g. P01 */
   id: string;
   name: string;
-  /** Live-Adresse ohne Schrägstrich am Ende, z. B. https://www.ehrenamtskiste.de */
+  /** Live URL without trailing slash, e.g. https://www.ehrenamtskiste.de */
   url: string;
   description: string;
   lang?: string;
-  /** false = Platzhalter-Phase: alle Seiten außer Impressum/Datenschutz noindex */
+  /** false = placeholder phase: all pages except imprint/privacy are noindex */
   live: boolean;
   nav: NavItem[];
-  /** Abweichungen von den zentralen Betreiberdaten (src/kit/operator.ts); nur geänderte Felder angeben */
+  /** Overrides of the central operator data (src/kit/operator.ts); only list changed fields */
   legal?: Partial<LegalInfo>;
-  /** Google Analytics 4 (Standard: aus). Aktiv nur mit enabled: true und gültiger ga4Id;
-   *  geladen wird GA erst nach Einwilligung im Banner. */
+  /** Google Analytics 4 (default: off). Active only with enabled: true and a valid ga4Id;
+   *  GA loads only after consent in the banner. */
   analytics?: { enabled: boolean; ga4Id?: string };
-  /** Kontaktformular (Standard: aus). enabled: true legt /kontakt/ an (Formular → kontakt.php).
-   *  to: Empfänger (Standard: legal.email, als ASCII/Punycode)
-   *  from: Absender – muss bei All-Inkl ein existierendes Postfach/Alias der Domain sein (Standard: noreply@domain) */
+  /** Contact form (default: off). enabled: true creates /kontakt/ (form → kontakt.php).
+   *  to: recipient (default: legal.email, as ASCII/punycode)
+   *  from: sender – must be an existing mailbox/alias of the domain at All-Inkl (default: noreply@domain) */
   contact?: { enabled: boolean; to?: string; from?: string };
-  /** 301-Weiterleitungen alt → neu, z. B. { '/ueber.html': '/ueber-mich/' }.
-   *  Alt: beliebiger alter Pfad; neu: Pfad nach URL-Standard, den es im Build gibt. Bestehende URLs nie still ändern. */
+  /** 301 redirects old → new, e.g. { '/ueber.html': '/ueber-mich/' }.
+   *  Old: any old path; new: path following the URL standard that exists in the build. Never change existing URLs silently. */
   redirects?: Record<string, string>;
-  /** Rubriken: erlaubte erste Pfad-Segmente für Unterseiten, z. B. ['ratgeber']. Gesetzt → jede Seite mit
-   *  zwei oder mehr Ebenen muss in einer Rubrik liegen (/ratgeber/…/), sonst bricht der Build ab. Leer = keine Vorgabe. */
+  /** Sections: allowed first path segments for nested pages, e.g. ['ratgeber']. If set → every page with
+   *  two or more levels must be inside a section (/ratgeber/…/), otherwise the build fails. Empty = no restriction. */
   sections?: string[];
-  /** Standard-Vorschaubild (Open Graph, 1200×630) für Seiten ohne eigenes Bild. Standard: /og.png (public/og.png).
-   *  Live-Build bricht ab, wenn die Datei fehlt. */
+  /** Default preview image (Open Graph, 1200×630) for pages without their own image. Default: /og.png (public/og.png).
+   *  The live build fails if the file is missing. */
   ogImage?: string;
-  /** Installierbare App über pwa-kit (Standard: aus). true → nach jedem Build Manifest, Icons, Offline-Seite und
-   *  sw.js aus pwa.config.json; braucht pwa-kit/ und pwa.config.json im Projekt (deploy-tool pwa-sync <ID>). */
+  /** Installable app via pwa-kit (default: off). true → after every build: manifest, icons, offline page and
+   *  sw.js from pwa.config.json; requires pwa-kit/ and pwa.config.json in the project (deploy-tool pwa-sync <ID>). */
   pwa?: boolean;
-  /** Pfade, die zusätzlich noindex sind (z. B. "/suche/") */
+  /** Additional noindex paths (e.g. "/suche/") */
   noindex?: string[];
   themeColor?: string;
 }
@@ -82,14 +82,22 @@ export function defineSite(config: SiteConfig): SiteConfig {
   return config;
 }
 
-/** Pfad des Standard-Vorschaubilds */
+/** Main domain from site.config.ts: protocol + host, no trailing / (e.g. https://www.rufnak.de). Fails the build otherwise. */
+export function siteUrl(site: SiteConfig): string {
+  if (!/^https?:\/\/[^/?#\s]+$/.test(site.url)) {
+    throw new Error(`site.config.ts: url '${site.url}' muss die Hauptdomain ohne / am Ende sein (z. B. https://www.rufnak.de).`);
+  }
+  return site.url;
+}
+
+/** Path of the default preview image */
 export function ogImagePath(site: SiteConfig): string {
   const p = site.ogImage ?? '/og.png';
   if (!p.startsWith('/')) throw new Error(`site.config.ts: ogImage '${p}' muss ein Pfad sein (z. B. /og.png).`);
   return p;
 }
 
-/** GA4-Mess-ID, wenn Analytics aktiv ist, sonst undefined. Bricht den Build bei ungültiger ID ab. */
+/** GA4 measurement ID if analytics is enabled, otherwise undefined. Fails the build on an invalid ID. */
 export function analyticsId(site: SiteConfig): string | undefined {
   if (site.analytics?.enabled !== true) return undefined;
   const id = site.analytics.ga4Id ?? '';
@@ -99,17 +107,17 @@ export function analyticsId(site: SiteConfig): string | undefined {
   return id;
 }
 
-/** Impressumsdaten mit aufgelöster E-Mail */
+/** Imprint data with resolved email */
 export type ResolvedLegalInfo = LegalInfo & { email: string };
 
-/** Projektdomain ohne www, in Unicode- und ASCII-Schreibweise (Punycode) */
+/** Project domain without www, in Unicode and ASCII spelling (punycode) */
 export function siteDomain(site: SiteConfig): { unicode: string; ascii: string } {
   const host = new URL(site.url).hostname.replace(/^www\./, '');
   const ascii = domainToASCII(host) || host;
   return { unicode: domainToUnicode(ascii) || ascii, ascii };
 }
 
-/** ASCII-Schreibweise einer E-Mail (Domainteil als Punycode), z. B. für mail() und Formulare */
+/** ASCII spelling of an email (domain part as punycode), e.g. for mail() and forms */
 export function asciiEmail(email: string): string {
   const at = email.lastIndexOf('@');
   if (at < 0) return email;
@@ -117,8 +125,8 @@ export function asciiEmail(email: string): string {
   return `${email.slice(0, at)}@${domainToASCII(domain) || domain}`;
 }
 
-/** Impressumsdaten: zentrale Betreiberdaten (operator.ts), überschrieben durch site.config.ts → legal.
- *  E-Mail ohne Angabe: info@<Projektdomain>; bei Umlaut-Domains zusätzlich die Punycode-Schreibweise als emailAlt. */
+/** Imprint data: central operator data (operator.ts), overridden by site.config.ts → legal.
+ *  Email if not given: info@<project domain>; for umlaut domains also the punycode spelling as emailAlt. */
 export function legalInfo(site: SiteConfig): ResolvedLegalInfo {
   const merged = { ...operator, ...(site.legal ?? {}) };
   const email = merged.email ?? `info@${siteDomain(site).unicode}`;
@@ -127,7 +135,7 @@ export function legalInfo(site: SiteConfig): ResolvedLegalInfo {
   return { ...merged, email, emailAlt };
 }
 
-/** true, wenn das Kontaktformular aktiv ist */
+/** true if the contact form is enabled */
 export function contactEnabled(site: SiteConfig): boolean {
   return site.contact?.enabled === true;
 }
