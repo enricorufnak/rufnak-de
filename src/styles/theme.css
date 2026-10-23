@@ -138,7 +138,8 @@ section { scroll-margin-top: 24px; }
 .contact dl div { display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: baseline; }
 .contact dt { opacity: .6; font-size: .9rem; }
 .contact dd { margin: 0; font-weight: 700; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; overflow-wrap: anywhere; }
-.contact dd a { text-decoration: underline; text-decoration-color: var(--mustard); text-underline-offset: 3px; }
+.contact dd a { text-decoration: none; text-decoration-color: var(--mustard); text-underline-offset: 3px; }
+.contact dd a:hover, .contact dd a:focus-visible, .contact dd a:active { text-decoration: underline; text-decoration-color: var(--mustard); }
 .copy { font: inherit; font-size: .75rem; font-weight: 700; border: 0; border-radius: 999px; padding: 3px 10px; background: rgba(255, 255, 255, .14); color: #fff; cursor: pointer; }
 .copy:hover { background: var(--mustard); color: var(--ink); }
 .copy[hidden] { display: none; }
@@ -146,8 +147,12 @@ section { scroll-margin-top: 24px; }
 /* Footer */
 .site-footer { color: var(--muted); font-size: .85rem; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--soft); padding-top: 18px; }
 .ftr-links { display: flex; gap: 14px; flex-wrap: wrap; }
-.site-footer a { color: inherit; text-decoration: underline; text-decoration-color: var(--mustard); text-underline-offset: 3px; }
-.site-footer a:hover { color: var(--ink); }
+.site-footer a { color: inherit; text-decoration: none; text-decoration-color: var(--mustard); text-underline-offset: 3px; }
+.site-footer a:hover, .site-footer a:focus-visible, .site-footer a:active { color: var(--ink); text-decoration: underline; text-decoration-color: var(--mustard); }
+/* current page: LegalLinks (kit) sets no aria-current, so match the path passed by Layout.astro */
+.ftr-links[data-path='/impressum/'] a[href='/impressum/'],
+.ftr-links[data-path='/datenschutz/'] a[href='/datenschutz/'],
+.ftr-links[data-path='/kontakt/'] a[href='/kontakt/'] { color: var(--ink); text-decoration: underline; text-decoration-color: var(--mustard); }
 
 /* Kit pages (imprint, privacy, 404) in the site style */
 .kit-page { max-width: 760px; }
